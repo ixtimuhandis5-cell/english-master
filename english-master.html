@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>English Master - IELTS gacha</title>
+<style>
+:root{--bg:#f3f6fc;--card:#fff;--ink:#1e2842;--mut:#6b7794;--pri:#4f46e5;--pri2:#7c3aed;--ok:#16a34a;--bad:#dc2626;--warn:#f59e0b;--line:#e2e8f4}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+header h1{margin:0;font-size:20px}
+.stats span{background:rgba(255,255,255,.2);padding:4px 10px;border-radius:20px;margin-left:6px;font-weight:600;font-size:14px}
+nav{display:flex;gap:6px;overflow-x:auto;padding:8px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{border:0;background:#eef1fb;color:var(--ink);padding:9px 14px;border-radius:12px;font-weight:600;cursor:pointer;white-space:nowrap;font-size:14px}
+nav button.on{background:var(--pri);color:#fff}
+main{max-width:980px;margin:0 auto;padding:16px}
+h2{margin:18px 0 8px}
+.mut{color:var(--mut)}
+.hero{background:#fff;border-radius:18px;padding:18px;box-shadow:0 2px 10px rgba(30,40,66,.07);margin-bottom:10px}
+.pbar,.bar{height:12px;background:#e6eaf6;border-radius:10px;overflow:hidden;flex:1}
+.pbar i,.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ok),#4ade80);border-radius:10px;transition:width .3s}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.card{background:var(--card);border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(30,40,66,.07);border:2px solid transparent}
+.topic,.item{cursor:pointer;transition:.15s}
+.topic:hover,.item:hover{transform:translateY(-2px);border-color:var(--pri)}
+.topic .ic{font-size:30px}
+.topic b{display:block}
+.stars{color:var(--warn);letter-spacing:2px}
+.tag{background:#eef1fb;border-radius:8px;padding:2px 8px;font-size:12px;margin-left:6px;color:var(--pri)}
+.lvh{display:flex;align-items:center;gap:8px;margin-top:22px}
+.lvh .b{background:var(--pri);color:#fff;border-radius:10px;padding:2px 12px;font-weight:700}
+button.btn{background:var(--pri);color:#fff;border:0;border-radius:12px;padding:11px 18px;font-weight:700;cursor:pointer;font-size:15px;margin:4px 4px 4px 0}
+button.btn:hover{filter:brightness(1.1)}
+button.btn.sec{background:#eef1fb;color:var(--ink)}
+button.btn.ok{background:var(--ok)}
+button.btn.red{background:var(--bad)}
+.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin:10px 0}
+.games button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px;font-weight:700;cursor:pointer;font-size:14px}
+.games button:hover{border-color:var(--pri);background:#f5f4ff}
+table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden}
+td,th{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+th{background:#eef1fb}
+.spk{background:#eef1fb;border:0;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:15px}
+.spk:hover{background:#dfe4fa}
+.intro{background:#fffbea;border-left:5px solid var(--warn);padding:10px 14px;border-radius:10px;margin:10px 0}
+.intro ul{margin:6px 0;padding-left:20px}
+.gh{display:flex;gap:10px;align-items:center}
+.x{border:0;background:none;font-size:20px;cursor:pointer}
+.gt{text-align:center;color:var(--mut);margin:8px 0}
+.panel{background:#fff;border-radius:18px;padding:20px;box-shadow:0 2px 10px rgba(30,40,66,.07);text-align:center}
+.q{font-size:24px;font-weight:700;margin:12px 0}
+.hint{color:var(--mut);margin-bottom:8px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+@media(max-width:560px){.opts{grid-template-columns:1fr}.q{font-size:20px}}
+.opt{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;font-size:16px;font-weight:600;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--pri);background:#f5f4ff}
+.opt.ok{background:#dcfce7;border-color:var(--ok)}
+.opt.bad{background:#fee2e2;border-color:var(--bad)}
+.fb{margin-top:14px;padding:14px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;text-align:left}
+.fb.ok{background:#dcfce7;color:#14532d}
+.fb.bad{background:#fee2e2;color:#7f1d1d}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:50px;margin:10px 0;padding:8px;border-radius:12px}
+.chips.ans{border-bottom:3px solid var(--line);background:#fafbff}
+.chip{background:#eef1fb;border:2px solid var(--line);border-radius:10px;padding:8px 13px;font-weight:700;cursor:pointer;font-size:18px}
+.chip.ghost{opacity:.25;cursor:default}
+input[type=text],textarea,select{width:100%;padding:12px;border:2px solid var(--line);border-radius:12px;font-size:16px;font-family:inherit}
+textarea{min-height:220px}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.m{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;font-size:16px;font-weight:600;cursor:pointer}
+.m.sel{border-color:var(--pri);background:#eeedff}
+.m.done{background:#dcfce7;border-color:var(--ok);opacity:.6;cursor:default}
+.m.err{animation:sh .3s;border-color:var(--bad)}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.passage{background:#fff;border-radius:14px;padding:16px;border-left:5px solid var(--pri);margin:10px 0;font-size:17px}
+.tq{background:#fff;border-radius:14px;padding:12px 14px;margin:10px 0}
+.rd{display:block;padding:7px 10px;border-radius:8px;cursor:pointer}
+.rd:hover{background:#f1f3fb}
+.rd.ok{background:#dcfce7}
+.rd.bad{background:#fee2e2}
+details{background:#fff;border-radius:14px;padding:10px 14px;margin:8px 0;box-shadow:0 1px 6px rgba(30,40,66,.06)}
+summary{cursor:pointer;font-weight:700}
+details ul,details ol{margin:8px 0;padding-left:22px}
+.res{text-align:center;padding:24px}
+.big{font-size:56px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.tabs button{border:2px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px;font-weight:700;cursor:pointer}
+.tabs button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.badge{display:inline-block;background:#fff;border-radius:14px;padding:10px 14px;margin:4px;box-shadow:0 1px 6px rgba(30,40,66,.08)}
+.badge.off{opacity:.35;filter:grayscale(1)}
+.timer{font-size:40px;font-weight:800;text-align:center;color:var(--pri)}
+.an{background:#f0fdf4;border-left:5px solid var(--ok);padding:12px 16px;border-radius:10px;margin-top:10px}
+.an li{margin:3px 0}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:24px}
+</style>
+</head>
+<body>
+<header>
+  <h1>🎓 English Master <small style="font-weight:400">A1 → IELTS 7+</small></h1>
+  <div class="stats"><span id="sx">⭐ 0 XP</span><span id="ss">🔥 0 kun</span></div>
+</header>
+<nav id="nav"></nav>
+<main id="app"></main>
+<footer>English Master • Natijalar shu kompyuter/brauzerda saqlanadi • Mikrofon uchun Google Chrome tavsiya etiladi</footer>
+
+<script>
+/* ============ ASOSIY YORDAMCHILAR ============ */
+const LS="english_master_v1";
+let S={xp:0,streak:0,last:"",done:{},right:0,total:0,reading:{},listening:{},mocks:[]};
+try{const x=JSON.parse(localStorage.getItem(LS));if(x)S=Object.assign(S,x)}catch(e){}
+function save(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}}
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+const app=()=>$("#app");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=(a,n)=>shuffle(a).slice(0,n);
+const norm=s=>String(s).toLowerCase().replace(/[^a-z0-9' ]/g,"").replace(/\s+/g," ").trim();
+function dayStr(d){return new Date(d).toISOString().slice(0,10)}
+function touchStreak(){const t=dayStr(Date.now());if(S.last===t)return;S.streak=(S.last===dayStr(Date.now()-864e5))?S.streak+1:1;S.last=t;save();head()}
+function addXP(n){S.xp+=n;touchStreak();save();head()}
+function head(){$("#sx").textContent="⭐ "+S.xp+" XP";$("#ss").textContent="🔥 "+S.streak+" kun"}
+function bind(sel,fn){$$(sel).forEach(e=>e.addEventListener("click",()=>fn(e)))}
+
+/* Ovoz (TTS) */
+let RATE=0.9;
+function speak(t,r){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=r||RATE;const v=speechSynthesis.getVoices().find(v=>/^en[-_](US|GB)/i.test(v.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b)speak(b.dataset.say,b.dataset.rate?+b.dataset.rate:0)});
+/* Mikrofon (SR) */
+const SRC=window.SpeechRecognition||window.webkitSpeechRecognition;
+function startSR(onres,onend,cont){if(!SRC)return null;try{const r=new SRC();r.lang="en-US";r.interimResults=true;r.continuous=!!cont;r.onresult=e=>{let s="";for(let i=0;i<e.results.length;i++)s+=e.results[i][0].transcript+" ";onres(s.trim())};r.onend=()=>onend&&onend();r.onerror=()=>{};r.start();return r}catch(e){return null}}
+function sim(a,b){const x=norm(a).split(" "),y=norm(b).split(" ");if(!y[0])return 0;let c=0;y.forEach(w=>{if(x.includes(w))c++});return c/Math.max(x.length,y.length)}
+
+/* ============ MAVZULAR (DARSLAR) ============ */
+const LEVELS={A1:"Boshlang'ich • IELTS ~3.0",A2:"Elementar • IELTS 3.5–4.0",B1:"O'rta • IELTS 4.5–5.5",B2:"Yuqori-o'rta • IELTS 6.0–6.5",C1:"Ilg'or • IELTS 7.0+"};
+const TOPICS=[
+/* ---------- A1 ---------- */
+{id:"num",lv:"A1",ic:"🎨",t:"Ranglar, kunlar, raqamlar",
+intro:`<p>Eng asosiy so'zlar. Har kuni ishlatasiz!</p><ul><li>Hafta kunlari va oylar <b>bosh harf</b> bilan yoziladi: Monday, Friday, May.</li><li>1–10: one, two, three, four, five, six, seven, eight, nine, ten.</li><li>O'nliklar: twenty, thirty, forty, fifty… Tartib sonlar: first, second, third.</li></ul>`,
+w:[["red","qizil"],["blue","ko'k"],["green","yashil"],["yellow","sariq"],["black","qora"],["white","oq"],["Monday","dushanba"],["Tuesday","seshanba"],["Friday","juma"],["Sunday","yakshanba"],["twenty","yigirma"],["hundred","yuz"],["thousand","ming"],["first","birinchi"]],
+g:[["The sky is ___.",["blue","red","black"],0],["The day after Monday is ___.",["Tuesday","Sunday","Friday"],0],["10 × 10 = one ___.",["hundred","thousand","twenty"],0],["Grass is ___.",["green","white","yellow"],0],["Saturday and ___ are the weekend.",["Sunday","Monday","Friday"],0]]},
+{id:"be",lv:"A1",ic:"🙋",t:"To be: am / is / are",
+intro:`<p><b>To be</b> — «bo'lmoq». Har bir olmosh o'z shakli bilan keladi:</p><ul><li><b>I am</b> (men), <b>He / She / It is</b> (u), <b>We / You / They are</b> (biz / siz / ular)</li><li>Inkor: <b>not</b> qo'shamiz → I am <b>not</b>, She is<b>n't</b></li><li>Savol: to be gap boshiga chiqadi → <b>Are</b> you ready?</li></ul>`,
+w:[["I am a student","Men talabaman"],["She is my sister","U mening opam"],["He is a doctor","U shifokor"],["We are friends","Biz do'stmiz"],["They are at home","Ular uyda"],["It is a cat","Bu mushuk"],["You are late","Siz kechikdingiz"],["I am not tired","Men charchamadim"],["Are you ready?","Tayyormisiz?"],["Is he here?","U shu yerdami?"]],
+g:[["She ___ a teacher.",["am","is","are"],1],["We ___ from Uzbekistan.",["is","are","am"],1],["I ___ not hungry.",["am","is","are"],0],["___ they at school?",["Is","Am","Are"],2],["It ___ a big city.",["are","is","am"],1],["You ___ very kind.",["is","am","are"],2]]},
+{id:"art",lv:"A1",ic:"📘",t:"Artikllar: a / an / the",
+intro:`<p>Artikl — otdan oldin keladigan kichik so'z.</p><ul><li><b>a</b> — undosh <i>tovush</i> bilan boshlansa: a book, a university (yu-tovush)</li><li><b>an</b> — unli <i>tovush</i> bilan boshlansa: an apple, an hour (h aytilmaydi)</li><li><b>the</b> — aniq, ma'lum narsa: the sun, the door</li></ul><p>Muhim: harfga emas, <b>tovushga</b> qarang!</p>`,
+w:[["a book","bitta kitob"],["an apple","bitta olma"],["an hour","bir soat"],["a university","bitta universitet"],["the sun","quyosh"],["the moon","oy"],["an umbrella","soyabon"],["a unique idea","noyob g'oya"],["the internet","internet"],["a European city","Yevropa shahri"]],
+g:[["I have ___ orange.",["a","an","the"],1],["She is ___ engineer.",["a","an","the"],1],["___ sun is hot.",["A","An","The"],2],["He goes to ___ university.",["a","an","the"],0],["It takes ___ hour.",["a","an","the"],1],["Can you close ___ door, please?",["a","an","the"],2]]},
+{id:"qw",lv:"A1",ic:"❓",t:"Savol so'zlari va predloglar",
+intro:`<p><b>Savol so'zlari:</b> What (nima), Where (qayerda), When (qachon), Why (nega), Who (kim), How (qanday).</p><ul><li><b>in</b> — ichida / yil, oy: in 2020, in May</li><li><b>on</b> — ustida / kun: on the table, on Monday</li><li><b>at</b> — aniq nuqta / soat: at 5 o'clock, at school</li></ul>`,
+w:[["What","nima"],["Where","qayerda"],["When","qachon"],["Why","nega"],["Who","kim"],["How","qanday"],["in","ichida"],["on","ustida"],["at","-da (nuqta)"],["under","ostida"],["between","orasida"],["behind","orqasida"]],
+g:[["___ is your name?",["What","Where","Why"],0],["The book is ___ the table.",["on","in","at"],0],["I was born ___ 1999.",["on","in","at"],1],["The meeting is ___ 5 o'clock.",["in","on","at"],2],["___ do you live? In Tashkent.",["Where","Who","When"],0]]},
+{id:"fam",lv:"A1",ic:"👨‍👩‍👧",t:"Oila va odamlar",
+intro:`<p>Oila a'zolari. Eslab qoling: <b>parents</b> = ota-ona, <b>grandparents</b> = bobo-buvi, <b>siblings</b> = aka-uka/opa-singillar.</p>`,
+w:[["mother","ona"],["father","ota"],["brother","aka / uka"],["sister","opa / singil"],["grandmother","buvi"],["grandfather","bobo"],["uncle","amaki / tog'a"],["aunt","xola / amma"],["cousin","amakivachcha"],["husband","er"],["wife","xotin"],["parents","ota-ona"],["daughter","qizi"],["son","o'g'li"]],
+g:[["My mother's brother is my ___.",["uncle","cousin","grandfather"],0],["My father's father is my ___.",["grandfather","uncle","son"],0],["My sister's daughter is my ___.",["niece","aunt","wife"],0],["My parents' parents are my ___.",["grandparents","children","cousins"],0],["I have two ___, a boy and a girl.",["children","parents","husbands"],0]]},
+{id:"food",lv:"A1",ic:"🍎",t:"Ovqat va ichimlik",
+intro:`<p>Sanaladigan va sanalmaydigan narsalar: <b>an apple</b> (sanaladi), lekin <b>some rice</b>, <b>some water</b> (sanalmaydi). «Qancha?» → <b>How much</b> water? «Nechta?» → <b>How many</b> apples?</p>`,
+w:[["bread","non"],["rice","guruch"],["meat","go'sht"],["chicken","tovuq"],["fish","baliq"],["vegetables","sabzavotlar"],["fruit","meva"],["milk","sut"],["water","suv"],["tea","choy"],["soup","sho'rva"],["sugar","shakar"],["salt","tuz"],["egg","tuxum"]],
+g:[["I drink ___ with sugar every morning.",["tea","bread","rice"],0],["Apples and bananas are ___.",["fruit","meat","soup"],0],["Chicken is a type of ___.",["meat","fruit","salt"],0],["Add some ___ to the soup. It is not salty enough.",["salt","sugar","milk"],0],["Plov is made of ___ and meat.",["rice","fish","eggs"],0]]},
+{id:"ps",lv:"A1",ic:"🔁",t:"Present Simple (odat, doimiy ish)",
+intro:`<p>Odat, doimiy holat va haqiqatlar uchun.</p><ul><li>I / you / we / they + <b>fe'l</b>: I work</li><li>He / she / it + <b>fe'l + s/es</b>: She work<b>s</b>, He go<b>es</b></li><li>Inkor: <b>don't / doesn't</b> + fe'l: He <b>doesn't</b> drink tea</li><li>Savol: <b>Do / Does</b> + ega + fe'l?</li><li>Belgilar: always, usually, often, sometimes, never, every day</li></ul>`,
+w:[["I wake up at 7","Men soat 7 da uyg'onaman"],["She works in a bank","U bankda ishlaydi"],["He doesn't drink tea","U choy ichmaydi"],["Do you speak English?","Ingliz tilida gapirasizmi?"],["They play football on Sundays","Ular yakshanba futbol o'ynaydi"],["The sun rises in the east","Quyosh sharqdan chiqadi"],["My brother studies a lot","Akam ko'p o'qiydi"],["Water boils at 100 degrees","Suv 100 darajada qaynaydi"]],
+g:[["He ___ to school every day.",["go","goes","going"],1],["They ___ not like coffee.",["do","does","is"],0],["She ___ English very well.",["speak","speaks","speaking"],1],["___ you live here?",["Do","Does","Are"],0],["My mother ___ TV in the evening.",["watch","watches","watchs"],1],["It ___ rain much in summer.",["don't","doesn't","isn't"],1]]},
+{id:"pc",lv:"A1",ic:"⏳",t:"Present Continuous (hozir bo'layotgan)",
+intro:`<p>Aynan hozir yoki shu kunlarda bo'layotgan ish.</p><ul><li><b>am / is / are + fe'l-ing</b>: I am reading</li><li>Inkor: She is <b>not</b> sleeping</li><li>Savol: <b>Are</b> you listening?</li><li>Belgilar: now, at the moment, look!, listen!</li></ul>`,
+w:[["I am reading now","Men hozir o'qiyapman"],["She is cooking dinner","U kechki ovqat tayyorlayapti"],["They are playing outside","Ular tashqarida o'ynayapti"],["Are you listening?","Tinglayapsizmi?"],["It is raining","Yomg'ir yog'yapti"],["We are not sleeping","Biz uxlamayapmiz"],["He is talking on the phone","U telefonda gaplashyapti"],["What are you doing?","Nima qilyapsiz?"]],
+g:[["Look! It ___ snowing.",["is","are","does"],0],["They ___ watching a film now.",["is","are","do"],1],["I ___ studying at the moment.",["am","is","are"],0],["She ___ not working today.",["are","is","do"],1],["___ he sleeping?",["Is","Does","Are"],0],["We ___ having lunch.",["is","am","are"],2]]},
+{id:"rout",lv:"A1",ic:"⏰",t:"Kundalik tartib",
+intro:`<p>Kun tartibini aytish uchun: <b>I wake up at 7</b>, <b>I have breakfast</b>. Chastota so'zlari fe'ldan <b>oldin</b>, to be dan <b>keyin</b> keladi: I <b>always</b> get up early. She is <b>never</b> late.</p>`,
+w:[["wake up","uyg'onmoq"],["get dressed","kiyinmoq"],["have breakfast","nonushta qilmoq"],["go to work","ishga bormoq"],["study","o'qimoq"],["have lunch","tushlik qilmoq"],["come back","qaytib kelmoq"],["do homework","uy vazifasini qilmoq"],["go to bed","uxlashga yotmoq"],["usually","odatda"],["always","doim"],["never","hech qachon"],["sometimes","ba'zan"]],
+g:[["I ___ at 6 o'clock every morning.",["wake up","go to bed","have lunch"],0],["I am never late. I ___ arrive on time.",["always","never","sometimes"],0],["We ___ breakfast at 8:00.",["have","do","make"],0],["He ___ his homework after school.",["does","makes","has"],0],["I ___ at 11 p.m. and sleep.",["go to bed","get dressed","wake up"],0]]},
+/* ---------- A2 ---------- */
+{id:"pas",lv:"A2",ic:"⏪",t:"Past Simple (o'tgan zamon)",
+intro:`<p>O'tgan zamonda tugagan ish.</p><ul><li>To'g'ri fe'l: <b>-ed</b> → visit<b>ed</b>, work<b>ed</b></li><li>Noto'g'ri fe'l: go → <b>went</b>, buy → <b>bought</b>, eat → <b>ate</b>, see → <b>saw</b></li><li>Inkor va savol: <b>didn't / Did</b> + oddiy fe'l: I didn't <b>go</b>. Did you <b>go</b>?</li><li>Belgilar: yesterday, last year, in 2020, ago</li></ul>`,
+w:[["I visited my uncle","Men amakimnikiga bordim"],["She went to Paris","U Parijga bordi"],["We didn't see him","Biz uni ko'rmadik"],["Did you call me?","Menga qo'ng'iroq qildingizmi?"],["He bought a new car","U yangi mashina sotib oldi"],["They ate pizza yesterday","Ular kecha pitsa yedi"],["I was very tired","Men juda charchagan edim"],["It happened last year","Bu o'tgan yili sodir bo'ldi"]],
+g:[["Yesterday I ___ to the market.",["go","went","goed"],1],["She ___ not come to class.",["do","does","did"],2],["They ___ a movie last night.",["watched","watch","watching"],0],["___ you finish your homework?",["Do","Did","Were"],1],["He ___ his keys yesterday.",["lose","lost","losted"],1],["We ___ in London in 2020.",["was","were","are"],1]]},
+{id:"fut",lv:"A2",ic:"🔮",t:"Kelasi zamon: will / going to",
+intro:`<p><b>will</b> — shu zahoti qaror, va'da, taxmin: I <b>will</b> help you.</p><p><b>be going to</b> — oldindan rejalashtirilgan yoki dalil bor: Look at the clouds! It <b>is going to</b> rain.</p>`,
+w:[["I will help you","Men sizga yordam beraman"],["It will rain tomorrow","Ertaga yomg'ir yog'adi"],["She is going to study medicine","U tibbiyot o'qimoqchi"],["We won't be late","Biz kechikmaymiz"],["Are you going to travel?","Sayohat qilmoqchimisiz?"],["I think he will win","Menimcha u g'alaba qozonadi"],["They are going to build a house","Ular uy qurmoqchi"],["Will you marry me?","Turmushga chiqasizmi?"]],
+g:[["Look at the clouds! It ___ rain.",["will","is going to","does"],1],["I promise I ___ call you.",["will","am going","do"],0],["She ___ visit us next week. It is planned.",["is going to","goes to","did"],0],["They ___ not come tomorrow.",["will","are","do"],0],["We ___ buy a new flat. We have decided.",["will","are going to","are"],1]]},
+{id:"cmp",lv:"A2",ic:"📏",t:"Solishtirish: -er / -est",
+intro:`<p><b>Qisqa sifat:</b> big → big<b>ger</b> → the big<b>gest</b>. <b>Uzun sifat:</b> beautiful → <b>more</b> beautiful → the <b>most</b> beautiful.</p><p>Istisno: good → better → the best, bad → worse → the worst, far → further → the furthest. Tenglik: <b>as … as</b>.</p>`,
+w:[["bigger than","...dan kattaroq"],["the biggest","eng katta"],["more beautiful","chiroyliroq"],["the most expensive","eng qimmat"],["as tall as","...dek baland"],["better","yaxshiroq"],["the worst","eng yomon"],["less important","kamroq muhim"],["further","uzoqroq"],["the cheapest","eng arzon"]],
+g:[["My house is ___ than yours.",["big","bigger","biggest"],1],["She is the ___ student in class.",["smarter","smartest","most smart"],1],["This book is ___ interesting than that one.",["more","most","much"],0],["Today is ___ day of the year.",["hotter","the hottest","hottest"],1],["He runs ___ than me.",["fast","faster","fastest"],1],["This is as good ___ that.",["than","as","like"],1]]},
+{id:"trav",lv:"A2",ic:"✈️",t:"Sayohat",
+intro:`<p>Aeroportda foydali iboralar: <b>Where is the check-in desk?</b> • <b>I have a reservation.</b> • <b>How much is a ticket to…?</b> • <b>My flight was delayed.</b></p>`,
+w:[["passport","pasport"],["ticket","chipta"],["luggage","yuk"],["airport","aeroport"],["flight","reys"],["hotel","mehmonxona"],["reservation","bron"],["map","xarita"],["tourist","sayyoh"],["journey","sayohat"],["visa","viza"],["departure","jo'nab ketish"],["arrival","yetib kelish"],["delay","kechikish"],["customs","bojxona"]],
+g:[["Do not forget your ___ at the airport.",["passport","soup","homework"],0],["I booked a ___ at the hotel.",["reservation","delay","journey"],0],["Our ___ was delayed by two hours.",["flight","fruit","visa"],0],["Tourists carry their things in ___.",["luggage","customs","maps"],0],["You need a ___ to enter some countries.",["visa","hotel","map"],0]]},
+{id:"hea",lv:"A2",ic:"🏥",t:"Salomatlik",
+intro:`<p>Shifokorda: <b>I have a headache.</b> • <b>I feel dizzy.</b> • <b>What should I do?</b> — <i>You should rest and drink water.</i> (<b>should</b> — maslahat).</p>`,
+w:[["headache","bosh og'rig'i"],["fever","isitma"],["cough","yo'tal"],["cold","shamollash"],["medicine","dori"],["pharmacy","dorixona"],["doctor","shifokor"],["appointment","qabul (belgilangan vaqt)"],["healthy","sog'lom"],["exercise","jismoniy mashq"],["diet","parhez"],["injury","jarohat"],["allergy","allergiya"],["symptom","alomat"]],
+g:[["I have a ___. My head hurts.",["headache","fever","pharmacy"],0],["You can buy medicine at the ___.",["pharmacy","airport","school"],0],["Regular ___ keeps you healthy.",["exercise","injury","cough"],0],["I made an ___ with the doctor.",["appointment","allergy","diet"],0],["Fever and cough are ___ of flu.",["symptoms","medicines","diets"],0]]},
+{id:"work",lv:"A2",ic:"💼",t:"Ish va kasblar",
+intro:`<p>Suhbatda: <b>I have five years of experience.</b> • <b>I am good at teamwork.</b> • <b>My salary is…</b> Eslab qoling: <b>job</b> (sanaladi: a job) va <b>work</b> (sanalmaydi: some work).</p>`,
+w:[["job","ish (lavozim)"],["salary","maosh"],["interview","ish suhbati"],["colleague","hamkasb"],["boss","boshliq"],["manager","menejer"],["employee","xodim"],["career","karyera"],["experience","tajriba"],["application","ariza"],["skill","ko'nikma"],["deadline","oxirgi muddat"],["meeting","yig'ilish"],["unemployed","ishsiz"]],
+g:[["I have a job ___ tomorrow.",["interview","salary","deadline"],0],["My ___ is very friendly. We work together.",["colleague","career","skill"],0],["We must finish by the ___.",["deadline","salary","application"],0],["She has ten years of ___ in teaching.",["experience","application","meeting"],0],["He lost his job and is ___.",["unemployed","employee","manager"],0]]},
+/* ---------- B1 ---------- */
+{id:"pp",lv:"B1",ic:"✅",t:"Present Perfect",
+intro:`<p>O'tgan voqea, lekin <b>hozirga aloqasi</b> bor yoki vaqt aytilmagan.</p><ul><li><b>have / has + 3-shakl (V3)</b>: I have finished</li><li><b>ever, never, just, already, yet</b>: Have you <b>ever</b> been to Japan?</li><li><b>for</b> (davomiylik: for 5 years) va <b>since</b> (boshlanish: since 2015)</li><li>Aniq o'tgan vaqt bilan ishlatilmaydi (yesterday ✗) → Past Simple.</li></ul>`,
+w:[["I have finished","Men tugatdim"],["She has lived here for 5 years","U bu yerda 5 yildan beri yashaydi"],["Have you ever been to Japan?","Hech Yaponiyada bo'lganmisiz?"],["We haven't met yet","Biz hali uchrashmadik"],["He has just left","U hozirgina ketdi"],["They have already eaten","Ular allaqachon ovqatlanishdi"],["I have known him since 2015","Men uni 2015-yildan beri bilaman"],["It has never happened before","Bu avval hech bo'lmagan"]],
+g:[["I ___ already seen this film.",["have","has","did"],0],["She ___ never been abroad.",["have","has","is"],1],["We have lived here ___ 2010.",["for","since","from"],1],["He has worked here ___ three years.",["for","since","during"],0],["___ you ever tried sushi?",["Did","Have","Are"],1],["They haven't arrived ___.",["yet","already","ago"],0]]},
+{id:"mod",lv:"B1",ic:"🚦",t:"Modal fe'llar",
+intro:`<p>Modal fe'llardan keyin <b>to'g'ridan-to'g'ri oddiy fe'l</b> keladi (to yo'q, -s yo'q).</p><ul><li><b>can / could</b> — qila olmoq • <b>may / might</b> — mumkin</li><li><b>must</b> — shart • <b>mustn't</b> — mumkin emas • <b>don't have to</b> — shart emas</li><li><b>should</b> — maslahat • <b>would</b> — xushmuomala so'rov</li></ul>`,
+w:[["You must wear a seatbelt","Kamar taqishingiz shart"],["You should rest","Dam olishingiz kerak"],["She can swim","U suza oladi"],["I could run fast as a child","Bolaligimda tez yugura olardim"],["May I come in?","Kirsam bo'ladimi?"],["You mustn't smoke here","Bu yerda chekish mumkin emas"],["He might be late","U kechikishi mumkin"],["We don't have to go","Bizga borish shart emas"],["Would you help me?","Menga yordam berarmidingiz?"]],
+g:[["You ___ smoke in the hospital. It is forbidden.",["mustn't","don't have to","can"],0],["You look tired. You ___ go to bed.",["should","might","can't"],0],["I ___ speak three languages.",["can","must","should"],0],["Tomorrow is Sunday. We ___ get up early.",["mustn't","don't have to","can't"],1],["___ you pass me the salt, please?",["Must","Could","Should"],1],["It ___ rain later. Take an umbrella.",["might","must","has to"],0]]},
+{id:"edu",lv:"B1",ic:"🎓",t:"Ta'lim",
+intro:`<p>IELTS Speaking'da ta'lim mavzusi juda ko'p uchraydi: <b>I'm studying…</b>, <b>I'd like to get a degree in…</b>, <b>I attend lectures</b>.</p>`,
+w:[["university","universitet"],["degree","ilmiy daraja"],["lecture","ma'ruza"],["assignment","topshiriq"],["exam","imtihon"],["scholarship","stipendiya"],["research","tadqiqot"],["subject","fan"],["graduate","bitirmoq"],["knowledge","bilim"],["curriculum","o'quv dasturi"],["tuition fees","o'qish to'lovi"],["attend","qatnashmoq"],["revise","takrorlamoq"]],
+g:[["She won a ___ and studies for free.",["scholarship","lecture","subject"],0],["I must ___ my notes before the exam.",["revise","graduate","attend"],0],["He earned a ___ in economics.",["degree","tuition","curriculum"],0],["The professor gave a long ___.",["lecture","research","knowledge"],0],["Students pay ___ fees.",["tuition","subject","exam"],0]]},
+/* ---------- B2 ---------- */
+{id:"cond",lv:"B2",ic:"🔀",t:"Shart gaplar (Conditionals)",
+intro:`<ul><li><b>0:</b> If + Present, Present → If you heat ice, it melts. (fan qonuni)</li><li><b>1:</b> If + Present, <b>will</b> + fe'l → If it rains, I will stay. (real kelajak)</li><li><b>2:</b> If + Past, <b>would</b> + fe'l → If I were rich, I would travel. (xayoliy hozir)</li><li><b>3:</b> If + Past Perfect, <b>would have</b> + V3 → If I had studied, I would have passed. (o'tmishdagi afsus)</li><li><b>unless</b> = if … not</li></ul>`,
+w:[["If it rains, I will stay home","Yomg'ir yog'sa, uyda qolaman"],["If I were rich, I would travel","Boy bo'lsam, sayohat qilardim"],["If I had studied, I would have passed","O'qiganimda, o'tgan bo'lardim"],["Unless you hurry, you will be late","Shoshilmasangiz, kechikasiz"],["If you heat ice, it melts","Muzni qizdirsangiz, erib ketadi"],["I wish I could fly","Qani edi uchsam"],["If I were you, I would apologize","Sizning o'rningizda bo'lsam, kechirim so'rardim"],["What would you do if you won?","Yutsangiz nima qilardingiz?"]],
+g:[["If it ___ tomorrow, we will cancel the picnic.",["rains","will rain","rained"],0],["If I ___ you, I would study harder.",["am","were","will be"],1],["If she ___ harder, she would pass the exam.",["studies","studied","will study"],1],["If I had known, I ___ you.",["would tell","would have told","will tell"],1],["___ you study, you won't pass.",["If","Unless","When"],1],["If you mix red and blue, you ___ purple.",["get","would get","got"],0]]},
+{id:"pass",lv:"B2",ic:"🔄",t:"Majhul nisbat (Passive)",
+intro:`<p>Ish bajaruvchi muhim bo'lmaganda yoki noma'lum bo'lganda ishlatiladi.</p><ul><li><b>to be + V3</b></li><li>Present: English <b>is spoken</b> • Past: The house <b>was built</b> • Future: It <b>will be sent</b></li><li>Present Perfect: It <b>has been done</b> • Jarayon: It <b>is being built</b></li><li>Kim qilganini aytish kerak bo'lsa: <b>by</b> …</li></ul>`,
+w:[["The book was written by him","Kitobni u yozgan"],["English is spoken worldwide","Ingliz tilida butun dunyoda gaplashiladi"],["The window was broken","Deraza sindirilgan"],["The house is being built","Uy qurilmoqda"],["The letter has been sent","Xat yuborilgan"],["The thief was caught","O'g'ri ushlandi"],["Rice is grown in Asia","Guruch Osiyoda yetishtiriladi"],["The film will be released soon","Film yaqinda chiqariladi"]],
+g:[["The cake ___ by my mother.",["was made","made","is make"],0],["Cars ___ in this factory.",["produce","are produced","is produced"],1],["The room ___ cleaned yesterday.",["is","was","has"],1],["The problem ___ solved by next week.",["will be","will","is being"],0],["These pictures ___ painted by a child.",["was","were","be"],1]]},
+{id:"rep",lv:"B2",ic:"💬",t:"Ko'chirma gap (Reported speech)",
+intro:`<p>Birovning gapini boshqa odamga yetkazamiz. Zamon <b>bir pog'ona orqaga</b> suriladi:</p><ul><li>am/is → <b>was</b> • will → <b>would</b> • can → <b>could</b></li><li>Present Simple → Past Simple • Past Simple → Past Perfect</li><li>Savol: She asked <b>where I lived</b> (tartib oddiy gapdagidek!)</li><li>Buyruq: He told me <b>to open</b> the door.</li></ul>`,
+w:[["She said that she was tired","U charchaganini aytdi"],["He told me he would come","U kelishini menga aytdi"],["They said they had finished","Ular tugatganlarini aytishdi"],["She asked where I lived","U qayerda yashashimni so'radi"],["He asked if I was ready","U tayyormanmi deb so'radi"],["She told him to sit down","U unga o'tirishni aytdi"],["I said I couldn't help","Yordam bera olmasligimni aytdim"],["He said he had been there","U u yerda bo'lganini aytdi"]],
+g:[["\"I am happy,\" she said. → She said she ___ happy.",["is","was","has been"],1],["\"I will call you,\" he said. → He said he ___ call me.",["will","would","did"],1],["\"Where do you live?\" → She asked where I ___.",["live","lived","do live"],1],["\"Open the door.\" → He told me ___ the door.",["open","to open","opened"],1],["\"I have finished.\" → She said she ___ finished.",["has","had","have"],1]]},
+{id:"rel",lv:"B2",ic:"🔗",t:"Aniqlovchi ergash gap (who/which/whose)",
+intro:`<ul><li><b>who / that</b> — odam uchun: the man <b>who</b> lives next door</li><li><b>which / that</b> — narsa uchun: the book <b>which</b> I read</li><li><b>whose</b> — egalik: the girl <b>whose</b> father is a pilot</li><li><b>where</b> — joy, <b>when</b> — vaqt, <b>why</b> — sabab</li></ul><p>IELTS Writing'da bu gaplar ball oshiradi!</p>`,
+w:[["the man who lives next door","qo'shni uyda yashaydigan erkak"],["the book which I read","men o'qigan kitob"],["the city where I was born","men tug'ilgan shahar"],["the girl whose father is a pilot","otasi uchuvchi bo'lgan qiz"],["a person that I admire","men hayratlanadigan inson"],["the day when we met","biz uchrashgan kun"],["the reason why he left","uning ketish sababi"],["my friend, who is a doctor,","do'stim, u shifokor,"]],
+g:[["The woman ___ called you is my aunt.",["which","who","where"],1],["This is the house ___ I grew up.",["where","who","whose"],0],["He is the boy ___ bike was stolen.",["who","which","whose"],2],["The film ___ we watched was boring.",["who","which","whose"],1],["I remember the day ___ we met.",["when","where","who"],0]]},
+{id:"env",lv:"B2",ic:"🌍",t:"Atrof-muhit",
+intro:`<p>IELTS Writing Task 2 va Speaking Part 3 da tez-tez chiqadi. Namuna: <i>Governments should invest in <b>renewable energy</b> to reduce <b>greenhouse gas</b> emissions.</i></p>`,
+w:[["pollution","ifloslanish"],["climate change","iqlim o'zgarishi"],["global warming","global isish"],["renewable energy","qayta tiklanuvchi energiya"],["deforestation","o'rmonlarni kesish"],["recycle","qayta ishlamoq"],["waste","chiqindi"],["endangered species","yo'qolib borayotgan turlar"],["greenhouse gas","issiqxona gazi"],["sustainable","barqaror"],["conservation","tabiatni muhofaza qilish"],["extinction","qirilib ketish"],["fossil fuels","qazilma yoqilg'i"],["drought","qurg'oqchilik"],["habitat","yashash muhiti"]],
+g:[["Cars and factories cause air ___.",["pollution","extinction","habitat"],0],["Solar and wind are ___ energy.",["renewable","fossil","waste"],0],["We should ___ plastic and paper.",["recycle","pollute","destroy"],0],["Cutting down forests is called ___.",["deforestation","conservation","recycling"],0],["Pandas are an ___ species.",["endangered","sustainable","renewable"],0]]},
+{id:"tech",lv:"B2",ic:"💻",t:"Texnologiya",
+intro:`<p>Texnologiya haqida fikr bildirish: <i>Technology has <b>revolutionised</b> the way we communicate.</i> • <i>On the one hand… on the other hand…</i></p>`,
+w:[["device","qurilma"],["software","dasturiy ta'minot"],["hardware","jihoz (texnik qism)"],["artificial intelligence","sun'iy intellekt"],["network","tarmoq"],["download","yuklab olmoq"],["upload","yuklamoq (joylamoq)"],["update","yangilamoq"],["password","parol"],["website","veb-sayt"],["innovation","yangilik, innovatsiya"],["automation","avtomatlashtirish"],["cybersecurity","kiberxavfsizlik"],["database","ma'lumotlar bazasi"]],
+g:[["Please ___ the app to the latest version.",["update","recycle","attend"],0],["Never share your ___ with anyone.",["password","habitat","deadline"],0],["AI means artificial ___.",["intelligence","innovation","network"],0],["Word and Excel are examples of ___.",["software","hardware","networks"],0],["Robots bring ___ to factories.",["automation","extinction","tuition"],0]]},
+{id:"t1v",lv:"B2",ic:"📈",t:"IELTS Task 1: grafik lug'ati",
+intro:`<p>Grafik va jadvallarni tasvirlash uchun kerakli so'zlar.</p><ul><li>Ko'tarilish: <b>rise, increase, grow, climb</b></li><li>Tushish: <b>fall, decrease, decline, drop</b></li><li>Tezlik: <b>sharply / dramatically</b> (tez), <b>steadily</b> (barqaror), <b>slightly</b> (sal)</li><li>Namuna: <i>The figure <b>rose sharply</b> from 20% to 50% between 2010 and 2015.</i></li></ul>`,
+w:[["increase","oshmoq"],["decrease","kamaymoq"],["fluctuate","tebranib turmoq"],["remain stable","barqaror qolmoq"],["peak","eng yuqori nuqtaga chiqmoq"],["plummet","keskin pasaymoq"],["a slight rise","ozgina o'sish"],["a sharp fall","keskin pasayish"],["proportion","ulush"],["figure","ko'rsatkich"],["dramatically","keskin"],["steadily","barqaror"],["approximately","taxminan"],["overall","umuman olganda"],["double","ikki barobar oshmoq"]],
+g:[["Sales ___ from 20 to 50 in five years.",["rose","peaked","plummeted"],0],["The figure ___ sharply from 80 to 10.",["plummeted","peaked","doubled"],0],["The number remained ___ at 30%.",["stable","dramatic","sharp"],0],["The price ___ at 100 in May, then fell.",["peaked","recovered","doubled"],0],["___, the trend was upward.",["Overall","Approximately","Steadily"],0]]},
+/* ---------- C1 ---------- */
+{id:"acad",lv:"C1",ic:"🏆",t:"Akademik so'zlar va bog'lovchilar (IELTS 7+)",
+intro:`<p>Bu so'zlar Writing va Speaking'da balingizni <b>6 dan 7 ga</b> chiqaradi.</p><ul><li>Qarama-qarshilik: <b>however, nevertheless, whereas, in contrast</b></li><li>Natija: <b>therefore, consequently, as a result</b></li><li>Qo'shish: <b>moreover, furthermore, in addition</b></li><li>Misol: <b>for instance, such as</b></li></ul>`,
+w:[["significant","sezilarli"],["approach","yondashuv"],["aspect","jihat"],["assume","faraz qilmoq"],["benefit","foyda"],["factor","omil"],["impact","ta'sir"],["issue","muammo, masala"],["majority","ko'pchilik"],["trend","tendensiya"],["however","biroq"],["therefore","shuning uchun"],["moreover","bundan tashqari"],["in contrast","aksincha"],["consequently","natijada"],["whereas","holbuki"],["nevertheless","shunga qaramay"]],
+g:[["Urban areas are growing. ___, rural populations are falling.",["Moreover","In contrast","Therefore"],1],["Prices rose; ___, fewer people bought cars.",["consequently","whereas","however"],0],["Social media has a big ___ on teenagers.",["impact","trend","aspect"],0],["The ___ of students prefer online classes.",["majority","factor","issue"],0],["Exercise is good. ___, it improves mood.",["Moreover","Whereas","Nevertheless"],0],["Sales fell; ___, the company made a profit.",["therefore","nevertheless","moreover"],1]]}
+];
+TOPICS.forEach(t=>{t.w=t.w.map(x=>[x[0],x[1]])});
+const ALLW=[].concat(...TOPICS.map(t=>t.w));
+
+/* ============ O'YINLAR ============ */
+const GN={quiz:"🧠 Viktorina",match:"🔗 Juftlik topish",build:"🧩 So'z / gap yig'ish",listen:"🎧 Eshit va tanla",gap:"✍️ Bo'sh joyni to'ldir",tf:"⚡ To'g'ri / Xato",speak:"🎤 Talaffuz"};
+const PATH=["quiz","match","build","listen","gap","tf","speak"];
+function qsQuiz(t){return pick(t.w,Math.min(8,t.w.length)).map((x,i)=>{const en=i%2===0;const wrong=pick(t.w.filter(y=>y!==x),3).map(y=>en?y[1]:y[0]);return{k:"mc",p:en?x[0]:x[1],say:en?x[0]:null,hl:en?"Tarjimasini tanlang":"Inglizchasini tanlang",o:shuffle(wrong.concat(en?x[1]:x[0])),a:en?x[1]:x[0]}})}
+function qsListen(t){return pick(t.w,Math.min(7,t.w.length)).map(x=>{const wrong=pick(t.w.filter(y=>y!==x),3).map(y=>y[0]);return{k:"mc",p:"🎧 Eshiting va to'g'ri javobni tanlang",say:x[0],hide:true,o:shuffle(wrong.concat(x[0])),a:x[0]}})}
+function qsGap(t){return shuffle(t.g).map(x=>({k:"mc",p:x[0],hl:"To'g'ri variantni tanlang",gap:true,o:shuffle(x[1]),a:x[1][x[2]]}))}
+function qsTF(t){return pick(t.w,Math.min(8,t.w.length)).map(x=>{const ok=Math.random()<0.5;const other=pick(t.w.filter(y=>y!==x),1)[0];return{k:"mc",p:`«${x[0]}» = «${ok?x[1]:other[1]}»`,say:x[0],hl:"Tarjima to'g'rimi?",o:["To'g'ri ✅","Xato ❌"],a:ok?"To'g'ri ✅":"Xato ❌",expl:`${x[0]} = ${x[1]}`}})}
+function qsBuild(t){return pick(t.w,Math.min(6,t.w.length)).map(x=>{const phrase=x[0].includes(" ");const tk=phrase?x[0].split(" "):x[0].split("");return{k:"build",hint:x[1],ans:x[0],join:phrase?" ":"",tokens:shuffle(tk),say:x[0]}})}
+function qsSpeak(t){return pick(t.w,Math.min(5,t.w.length)).map(x=>({k:"speak",text:x[0],hint:x[1]}))}
+function playGame(t,ty,cb,exit){
+  if(ty==="match")return runMatch(t,cb,exit);
+  const f={quiz:qsQuiz,listen:qsListen,gap:qsGap,tf:qsTF,build:qsBuild,speak:qsSpeak}[ty];
+  runQs(f(t),{title:GN[ty]+" • "+t.t,exit},cb);
+}
+
+/* Savol harakatlantirgichi */
+let G=null;
+function runQs(qs,o,cb){G={qs,i:0,c:0,o,cb};showQ()}
+function ghead(){return `<div class="gh"><button class="x" id="gx" title="Chiqish">✖</button><div class="bar"><i style="width:${Math.round(G.i/G.qs.length*100)}%"></i></div><b>${Math.min(G.i+1,G.qs.length)}/${G.qs.length}</b></div><div class="gt">${esc(G.o.title)}</div>`}
+function exitG(){if(confirm("O'yindan chiqasizmi?")){speechSynthesis&&speechSynthesis.cancel();(G&&G.o.exit)?G.o.exit():go("home")}}
+function feedback(ok,right,extra){
+  S.total++;if(ok){G.c++;S.right++}save();
+  $("#fb").innerHTML=`<div class="fb ${ok?"ok":"bad"}"><div><b>${ok?"✅ To'g'ri! +5 XP":"❌ To'g'ri javob:"}</b> ${ok?"":esc(right)}${extra?"<br><small>"+esc(extra)+"</small>":""}</div><button class="btn" id="nx">Davom etish ▶</button></div>`;
+  $("#nx").onclick=()=>{G.i++;showQ()};
+  $("#nx").focus();
+}
+function showQ(){
+  if(G.i>=G.qs.length){return G.cb({c:G.c,t:G.qs.length})}
+  const q=G.qs[G.i];let h=ghead()+`<div class="panel">`;
+  if(q.k==="mc"){
+    h+=`<div class="hint">${esc(q.hl||"")}</div>`;
+    if(q.hide)h+=`<div class="q">${esc(q.p)}</div>`;else h+=`<div class="q">${esc(q.p).replace("___","<span style='color:var(--pri)'>_____</span>")}</div>`;
+    if(q.say)h+=`<button class="spk" data-say="${esc(q.say)}" style="width:50px;height:50px;font-size:24px">🔊</button><button class="spk" data-say="${esc(q.say)}" data-rate="0.5" title="Sekin" style="width:50px;height:50px;font-size:22px;margin-left:6px">🐢</button>`;
+    h+=`<div class="opts">`+q.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join("")+`</div></div><div id="fb"></div>`;
+    app().innerHTML=h;
+    $("#gx").onclick=exitG;
+    if(q.say&&q.hide)setTimeout(()=>speak(q.say),250);else if(q.say&&G.o.autoSay)speak(q.say);
+    bind(".opt",b=>{const ok=q.o[+b.dataset.i]===q.a;$$(".opt").forEach(x=>{x.disabled=true;if(q.o[+x.dataset.i]===q.a)x.classList.add("ok")});if(!ok)b.classList.add("bad");if(ok)addXP(5);feedback(ok,q.a,q.expl||(q.hide?"Matn: "+q.say:""))});
+  }else if(q.k==="build"){
+    h+=`<div class="hint">Tarjimasi: <b>${esc(q.hint)}</b></div><div class="q" style="font-size:18px">Bo'laklarni to'g'ri tartibda joylashtiring</div><div class="chips ans" id="ansL"></div><div class="chips" id="poolL"></div><button class="btn" id="chk">Tekshirish</button><button class="btn sec" id="clr">Tozalash</button><button class="spk" data-say="${esc(q.say)}">🔊</button></div><div id="fb"></div>`;
+    app().innerHTML=h;$("#gx").onclick=exitG;
+    let sel=[];const pool=q.tokens;
+    const draw=()=>{$("#ansL").innerHTML=sel.map((ix,k)=>`<span class="chip" data-k="${k}">${esc(pool[ix])}</span>`).join("");$("#poolL").innerHTML=pool.map((tk,ix)=>sel.includes(ix)?`<span class="chip ghost">${esc(tk)}</span>`:`<span class="chip" data-ix="${ix}">${esc(tk)}</span>`).join("");
+      $$("#ansL [data-k]").forEach(e=>e.onclick=()=>{sel.splice(+e.dataset.k,1);draw()});$$("#poolL [data-ix]").forEach(e=>e.onclick=()=>{sel.push(+e.dataset.ix);draw()})};
+    draw();$("#clr").onclick=()=>{sel=[];draw()};
+    $("#chk").onclick=()=>{const got=sel.map(i=>pool[i]).join(q.join);const ok=norm(got)===norm(q.ans);$("#chk").disabled=true;$("#clr").disabled=true;if(ok)addXP(5);speak(q.say);feedback(ok,q.ans)};
+  }else if(q.k==="type"){
+    h+=`<div class="hint">Eshiting va aynan yozing (diktant)</div><button class="spk" data-say="${esc(q.say)}" style="width:56px;height:56px;font-size:26px">🔊</button><button class="spk" data-say="${esc(q.say)}" data-rate="0.55" style="width:56px;height:56px;font-size:24px;margin-left:6px">🐢</button><div style="margin:14px 0"><input type="text" id="ti" placeholder="Eshitganingizni yozing..." autocomplete="off"></div><button class="btn" id="chk">Tekshirish</button></div><div id="fb"></div>`;
+    app().innerHTML=h;$("#gx").onclick=exitG;setTimeout(()=>speak(q.say),250);
+    $("#chk").onclick=()=>{const ok=norm($("#ti").value)===norm(q.say);$("#chk").disabled=true;if(ok)addXP(8);feedback(ok,q.say)};
+  }else if(q.k==="speak"){
+    h+=`<div class="hint">Baland ovozda ayting: ${esc(q.hint)}</div><div class="q">${esc(q.text)}</div><button class="spk" data-say="${esc(q.text)}" style="width:50px;height:50px;font-size:24px">🔊</button><div style="margin:14px 0"><button class="btn" id="mic">🎤 Gapirish</button></div><div id="heard" class="mut" style="min-height:24px"></div><div class="row" style="justify-content:center"><button class="btn sec" id="self1">✔ Ayta oldim</button><button class="btn sec" id="self0">✖ Qiyin edi</button></div><small class="mut">Mikrofon ishlamasa, o'zingizni baholang.</small></div><div id="fb"></div>`;
+    app().innerHTML=h;$("#gx").onclick=exitG;
+    let done=false;const fin=(ok,extra)=>{if(done)return;done=true;if(ok)addXP(5);feedback(ok,q.text,extra)};
+    $("#self1").onclick=()=>fin(true);$("#self0").onclick=()=>fin(false);
+    $("#mic").onclick=()=>{if(!SRC){$("#heard").textContent="Brauzer mikrofonni qo'llamaydi — o'zingizni baholang (Chrome tavsiya).";return}$("#mic").textContent="🎙 Tinglayapman...";let last="";const r=startSR(s=>{last=s;$("#heard").textContent="Eshitildi: "+s},()=>{if(done)return;if(!last){$("#heard").textContent="Hech narsa eshitilmadi. Qayta urinib ko'ring.";$("#mic").textContent="🎤 Qayta urinish";return}const sc=sim(last,q.text);fin(sc>=0.6,"Siz aytdingiz: "+last)},false);if(!r){$("#heard").textContent="Mikrofon ochilmadi. O'zingizni baholang."}}
+  }
+}
+
+/* Juftlik topish */
+function runMatch(t,cb,exit){
+  let items=pick(t.w.filter(x=>x[0].length<=28),6);if(items.length<4)items=pick(t.w,6);
+  const L=items.map((x,i)=>({id:i,txt:x[0]})),R=shuffle(items.map((x,i)=>({id:i,txt:x[1]})));
+  let selL=null,selR=null,left=items.length,mist=0;
+  app().innerHTML=`<div class="gh"><button class="x" id="gx">✖</button><div class="bar"><i id="mb" style="width:0%"></i></div></div><div class="gt">${esc(GN.match+" • "+t.t)}</div><div class="panel"><div class="hint">Inglizcha so'zni uning tarjimasi bilan juftlang</div><div class="mgrid"><div id="cl"></div><div id="cr"></div></div><div id="fb"></div></div>`;
+  $("#gx").onclick=()=>{if(confirm("O'yindan chiqasizmi?"))exit?exit():go("home")};
+  $("#cl").innerHTML=L.map(x=>`<button class="m" style="width:100%;margin-bottom:8px" data-s="l" data-id="${x.id}">${esc(x.txt)}</button>`).join("");
+  $("#cr").innerHTML=R.map(x=>`<button class="m" style="width:100%;margin-bottom:8px" data-s="r" data-id="${x.id}">${esc(x.txt)}</button>`).join("");
+  const test=()=>{if(selL===null||selR===null)return;const a=selL,b=selR;selL=selR=null;
+    if(a.dataset.id===b.dataset.id){a.className=b.className="m done";left--;addXP(4);$("#mb").style.width=(100-left/items.length*100)+"%";S.right++;S.total++;if(!left){save();setTimeout(()=>cb({c:items.length,t:items.length+mist}),500)}}
+    else{mist++;S.total++;[a,b].forEach(e=>{e.classList.remove("sel");e.classList.add("err");setTimeout(()=>e.classList.remove("err"),350)})}};
+  $$(".m").forEach(b=>b.onclick=()=>{if(b.classList.contains("done"))return;const s=b.dataset.s;$$(`.m[data-s=${s}]`).forEach(x=>x.classList.remove("sel"));b.classList.add("sel");if(s==="l"){selL=b;speak(b.textContent)}else selR=b;test()});
+}
+
+/* Natija ekranlari */
+function stars(p){return p>=85?3:p>=65?2:p>=40?1:0}
+function runPath(t){
+  let acc={c:0,t:0},k=0;
+  const next=()=>{
+    if(k>=PATH.length)return finishTopic(t,acc);
+    const ty=PATH[k];
+    playGame(t,ty,r=>{acc.c+=r.c;acc.t+=r.t;k++;
+      app().innerHTML=`<div class="panel res"><div class="big">${r.c/r.t>=0.7?"🎉":"💪"}</div><h2>${esc(GN[ty])} tugadi</h2><p>Natija: <b>${r.c}/${r.t}</b></p><div class="bar" style="margin:12px auto;max-width:300px"><i style="width:${k/PATH.length*100}%"></i></div><p class="mut">${k}/${PATH.length} o'yin</p><button class="btn" id="go">${k>=PATH.length?"Yakuniy natija 🏁":"Keyingi o'yin ▶"}</button></div>`;
+      $("#go").onclick=next},()=>openTopic(t.id));
+  };next();
+}
+function finishTopic(t,acc){
+  const p=Math.round(acc.c/Math.max(acc.t,1)*100),st=stars(p);
+  const first=!(S.done[t.id]>0);
+  S.done[t.id]=Math.max(S.done[t.id]||0,st);const bonus=st*20;addXP(bonus);save();
+  const i=TOPICS.indexOf(t),nx=TOPICS[i+1];
+  app().innerHTML=`<div class="panel res"><div class="big">${["😕","⭐","⭐⭐","⭐⭐⭐"][st]}</div><h2>${st>=2?"Ajoyib!":st===1?"Yaxshi, lekin yana urinib ko'ring":"Mavzuni qayta o'qing"}</h2><p>To'g'ri javoblar: <b>${acc.c}/${acc.t}</b> (${p}%)</p><p>Bonus: <b>+${bonus} XP</b></p><p class="mut">${st<3?"3 yulduz uchun 85% kerak. Darsni qayta o'qib, yana o'ynang!":"Mavzu o'zlashtirildi!"}</p><button class="btn" id="b1">Mavzuga qaytish</button><button class="btn sec" id="b2">🔁 Qayta o'ynash</button>${nx?`<button class="btn ok" id="b3">Keyingi mavzu ▶</button>`:""}</div>`;
+  $("#b1").onclick=()=>openTopic(t.id);$("#b2").onclick=()=>runPath(t);if(nx)$("#b3").onclick=()=>openTopic(nx.id);
+}
+function singleGame(t,ty){
+  playGame(t,ty,r=>{const p=Math.round(r.c/r.t*100);addXP(stars(p)*5);
+    app().innerHTML=`<div class="panel res"><div class="big">${p>=70?"🎉":"💪"}</div><h2>${GN[ty]}</h2><p>Natija: <b>${r.c}/${r.t}</b> (${p}%)</p><button class="btn" id="b1">Mavzuga qaytish</button><button class="btn sec" id="b2">🔁 Qayta</button></div>`;
+    $("#b1").onclick=()=>openTopic(t.id);$("#b2").onclick=()=>singleGame(t,ty)},()=>openTopic(t.id));
+}
+
+/* ============ KO'RINISHLAR ============ */
+let VIEW="home",CUR=null;
+const TABS=[["home","🏠 Darslar"],["read","📖 Reading"],["listen","🎧 Listening"],["speak","🎤 Speaking"],["write","✍️ Writing"],["ielts","🎓 IELTS"],["stat","🏆 Natija"]];
+function go(v){VIEW=v;speechSynthesis&&speechSynthesis.cancel();render()}
+function render(){
+  $("#nav").innerHTML=TABS.map(t=>`<button data-v="${t[0]}" class="${t[0]===VIEW?"on":""}">${t[1]}</button>`).join("");
+  bind("#nav button",b=>go(b.dataset.v));
+  ({home:viewHome,read:viewRead,listen:viewListen,speak:viewSpeak,write:viewWrite,ielts:viewIelts,stat:viewStat})[VIEW]();
+  window.scrollTo(0,0);
+}
+function viewHome(){
+  const done=Object.keys(S.done).length,tot=TOPICS.length;
+  let h=`<div class="hero"><h2 style="margin:0">Salom! 👋 Bugun nimani o'rganamiz?</h2><p class="mut">Har bir mavzu: <b>dars → 7 xil o'yin → yulduzlar</b>. Mavzuni tugatgach o'yinlar bilan mustahkamlaysiz. Yuqoridagi tugmalarda Reading, Listening, Speaking, Writing va IELTS tayyorgarlik.</p><div style="display:flex;gap:10px;align-items:center"><div class="pbar"><i style="width:${done/tot*100}%"></i></div><b>${done}/${tot}</b></div></div>`;
+  Object.keys(LEVELS).forEach(lv=>{const ts=TOPICS.filter(t=>t.lv===lv);h+=`<div class="lvh"><span class="b">${lv}</span><b>${LEVELS[lv]}</b></div><div class="grid" style="margin-top:8px">`+ts.map(t=>{const s=S.done[t.id]||0;return `<div class="card topic" data-t="${t.id}"><div class="ic">${t.ic}</div><b>${t.t}</b><span class="stars">${s?"★".repeat(s)+"☆".repeat(3-s):"☆☆☆"}</span></div>`}).join("")+`</div>`});
+  app().innerHTML=h;bind(".topic",e=>openTopic(e.dataset.t));
+}
+function openTopic(id){
+  VIEW="home";const t=TOPICS.find(x=>x.id===id);CUR=t;
+  $("#nav").innerHTML=TABS.map(x=>`<button data-v="${x[0]}" class="${x[0]==="home"?"on":""}">${x[1]}</button>`).join("");bind("#nav button",b=>go(b.dataset.v));
+  let h=`<button class="btn sec" id="back">◀ Barcha mavzular</button><h2>${t.ic} ${t.t} <span class="tag">${t.lv}</span></h2><div class="intro">${t.intro}</div><h3>📚 So'zlar va iboralar <small class="mut">(🔊 bosib eshiting)</small></h3><table><tr><th></th><th>English</th><th>O'zbekcha</th></tr>${t.w.map(x=>`<tr><td><button class="spk" data-say="${esc(x[0])}">🔊</button></td><td><b>${esc(x[0])}</b></td><td>${esc(x[1])}</td></tr>`).join("")}</table>`;
+  h+=`<h3>🎮 O'yinlar bilan mustahkamlash</h3><button class="btn ok" id="path" style="font-size:17px;padding:14px 22px">▶ To'liq o'yin yo'li (7 ta o'yin, yulduz olish)</button><div class="games">${PATH.map(p=>`<button data-g="${p}">${GN[p]}</button>`).join("")}</div>`;
+  app().innerHTML=h;window.scrollTo(0,0);
+  $("#back").onclick=()=>go("home");$("#path").onclick=()=>runPath(t);bind("[data-g]",b=>singleGame(t,b.dataset.g));
+}
+
+/* ---------- READING ---------- */
+const TFNG=["True","False","Not Given"];
+const READ=[
+{lv:"A2",title:"Samarkand — shahar tavsifi",text:"Samarkand is one of the oldest cities in Central Asia. Every year thousands of tourists visit the Registan, a famous square with three madrasas. Many visitors also enjoy the local bread, which is baked in clay ovens and sold in the bazaar. The best time to visit is spring, when the weather is warm and the gardens are green. In summer, it can be very hot, so tourists usually walk in the morning or in the evening.",
+qs:[{q:"What is the Registan?",o:["a bazaar","a famous square","a clay oven"],a:1},{q:"Where is the local bread baked?",o:["in clay ovens","in gardens","in madrasas"],a:0},{q:"Samarkand is the oldest city in the world.",o:TFNG,a:1},{q:"The best time to visit is spring.",o:TFNG,a:0},{q:"Hotels in Samarkand are cheap.",o:TFNG,a:2}]},
+{lv:"B1",title:"Uyqu va salomatlik",text:"Scientists say that adults need seven to nine hours of sleep every night. When people sleep less, they find it harder to concentrate and their memory becomes weaker. A recent study of 2,000 students showed that those who slept eight hours scored higher in exams than those who stayed up late. Experts advise going to bed at the same time every day and avoiding phones for an hour before sleep, because the blue light from screens makes it difficult to fall asleep.",
+qs:[{q:"How many hours of sleep do adults need?",o:["5–6 hours","7–9 hours","10–12 hours"],a:1},{q:"What happens when people sleep less?",o:["Their memory gets weaker","They become taller","They eat less"],a:0},{q:"Students who slept eight hours scored higher.",o:TFNG,a:0},{q:"Coffee helps people sleep better.",o:TFNG,a:2},{q:"Blue light from screens helps people fall asleep.",o:TFNG,a:1}]},
+{lv:"B2",title:"Masofaviy ish",text:"Over the past decade, remote work has changed from a rare privilege into a common practice. Supporters argue that it saves commuting time, reduces office costs and allows companies to hire talent from anywhere. Critics, however, point out that employees may feel isolated and that the boundary between work and personal life can become blurred. A survey in several countries found that although most workers valued flexibility, nearly a third reported difficulty switching off after working hours. As a result, many firms are now adopting hybrid models, in which staff spend some days in the office and others at home.",
+qs:[{q:"What is the main idea of the passage?",o:["Remote work has advantages and disadvantages","Offices will disappear soon","Remote work is illegal in many countries"],a:0},{q:"What does 'blurred' suggest about work and personal life?",o:["They are clearer","They are less clearly separated","They are more expensive"],a:1},{q:"Most workers disliked flexibility.",o:TFNG,a:1},{q:"Hybrid models combine office work and home work.",o:TFNG,a:0},{q:"Remote work increases salaries.",o:TFNG,a:2}]},
+{lv:"C1",title:"Urbanizatsiya",text:"Urbanisation is occurring at an unprecedented rate, with more than half of the world's population now living in cities. While urban centres offer economic opportunities, better healthcare and cultural amenities, rapid growth often outpaces infrastructure development, leading to congestion, pollution and informal settlements. Urban planners increasingly advocate compact, mixed-use neighbourhoods where residents can reach schools, shops and workplaces on foot or by public transport. Such designs, they argue, not only cut carbon emissions but also strengthen community ties. Nevertheless, implementing these ideas requires substantial investment and political will, which many developing countries lack.",
+qs:[{q:"According to the passage, rapid urban growth often…",o:["improves infrastructure","outpaces infrastructure","reduces pollution"],a:1},{q:"Planners support neighbourhoods where…",o:["people drive long distances","services are within easy reach","only offices exist"],a:1},{q:"Compact neighbourhoods may reduce carbon emissions.",o:TFNG,a:0},{q:"All developing countries have enough money for these plans.",o:TFNG,a:1},{q:"Asian cities are growing faster than African cities.",o:TFNG,a:2}]}
+];
+function testHtml(qs,pre){return qs.map((q,i)=>`<div class="tq" id="${pre}${i}"><p><b>${i+1}.</b> ${esc(q.q)}</p>${q.o.map((o,j)=>`<label class="rd"><input type="radio" name="${pre}${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("")}
+function gradeTest(qs,pre){let c=0;qs.forEach((q,i)=>{const sel=document.querySelector(`input[name=${pre}${i}]:checked`);$$(`#${pre}${i} .rd`).forEach((l,j)=>{if(j===q.a)l.classList.add("ok");else if(sel&&+sel.value===j)l.classList.add("bad")});if(sel&&+sel.value===q.a)c++});return c}
+function viewRead(){
+  let h=`<h2>📖 Reading</h2><p class="mut">Matnni o'qing, savollarga javob bering. IELTS dagi <b>True / False / Not Given</b> turi ham bor.</p><details open><summary>💡 IELTS Reading maslahatlari</summary><ul><li>Avval <b>savollarni</b> o'qing, keyin matndan javobni qidiring (skimming).</li><li><b>True</b> — matn tasdiqlaydi; <b>False</b> — matn zid; <b>Not Given</b> — matnda umuman yo'q.</li><li>Bitta so'zni bilmasangiz, to'xtab qolmang — ma'nosini kontekstdan taxmin qiling.</li><li>1 ta matnga ≈ 20 daqiqa. Qiyin savolni tashlab ketib, keyin qayting.</li></ul></details>`;
+  h+=`<div class="grid">`+READ.map((r,i)=>`<div class="card item" data-r="${i}"><b>${r.title}</b><span class="tag">${r.lv}</span><div class="mut">${S.reading[i]!==undefined?"Oxirgi natija: "+S.reading[i]+"/"+r.qs.length:"Hali ishlanmagan"}</div></div>`).join("")+`</div>`;
+  app().innerHTML=h;bind("[data-r]",e=>openRead(+e.dataset.r));
+}
+function openRead(i){
+  const r=READ[i];
+  app().innerHTML=`<button class="btn sec" id="back">◀ Orqaga</button><h2>${r.title} <span class="tag">${r.lv}</span></h2><div class="passage">${r.text}</div><div class="row"><button class="btn sec" data-say="${esc(r.text)}">🔊 Matnni eshitish</button></div>${testHtml(r.qs,"rq")}<button class="btn" id="chk">Tekshirish</button><div id="out"></div>`;
+  $("#back").onclick=()=>go("read");
+  $("#chk").onclick=()=>{const c=gradeTest(r.qs,"rq");S.reading[i]=c;addXP(c*6);save();$("#chk").disabled=true;$("#out").innerHTML=`<div class="an"><b>Natija: ${c}/${r.qs.length}</b> — ${c===r.qs.length?"Zo'r! 🎉":c>=r.qs.length-1?"Yaxshi! 👍":"Matnni yana bir marta o'qib ko'ring."}<br>Yashil — to'g'ri javob, qizil — sizning xatoyingiz.</div>`}
+}
+
+/* ---------- LISTENING ---------- */
+const DICT={A1:["My name is Anna and I live in London.","Can I have a glass of water, please?","What time does the lesson start?"],A2:["The train to Manchester leaves at half past seven.","I usually go to the gym after work.","She is going to visit her grandmother on Sunday."],B1:["If the weather is good, we will have a picnic on Sunday.","She has been studying English for three years.","You should drink more water and sleep well."],B2:["The conference was postponed because of unexpected circumstances.","Despite the heavy traffic, we arrived on time.","The government has introduced new measures to reduce pollution."],C1:["Governments should invest more in renewable energy to combat climate change.","The results of the survey were far more encouraging than anticipated.","Had I known about the delay, I would have taken a different route."]};
+const LIST=[
+{lv:"A2",title:"Stolni bron qilish (telefon)",text:"Hello, I'd like to book a table for four people on Friday at seven thirty. My name is Sarah Green. We would like a table near the window, please.",qs:[{q:"How many people is the table for?",o:["Two","Four","Six"],a:1},{q:"Which day is the booking?",o:["Thursday","Friday","Saturday"],a:1},{q:"Where do they want to sit?",o:["near the door","near the window","outside"],a:1}]},
+{lv:"B1",title:"Vokzal e'loni",text:"Good morning, passengers. The nine fifteen train to Birmingham has been delayed by twenty minutes due to a signal problem. It will now depart from platform six instead of platform two. We apologise for the inconvenience.",qs:[{q:"Which platform will the train leave from now?",o:["Platform two","Platform six","Platform nine"],a:1},{q:"How long is the delay?",o:["15 minutes","20 minutes","50 minutes"],a:1},{q:"What caused the delay?",o:["bad weather","a signal problem","a strike"],a:1}]},
+{lv:"B2",title:"Ma'ruza: qayta tiklanuvchi energiya",text:"Today I'd like to talk about renewable energy. Solar power has become much cheaper over the last decade, falling in price by almost ninety percent. Wind energy is also growing fast, especially in coastal regions. However, the main challenge is storage, because the sun does not always shine and the wind does not always blow. Researchers are now developing new batteries to solve this problem.",qs:[{q:"By how much has the price of solar power fallen?",o:["about 19%","about 90%","about 9%"],a:1},{q:"What is the main challenge?",o:["cost of land","storage","lack of researchers"],a:1},{q:"Where is wind energy growing especially fast?",o:["in cities","in coastal regions","in deserts"],a:1}]}
+];
+let DL="A1";
+function viewListen(){
+  let h=`<h2>🎧 Listening</h2><p class="mut">Brauzer inglizcha matnni ovoz chiqarib o'qiydi. Avval eshiting, matnga qarashdan oldin javob bering!</p><div class="row"><label>Ovoz tezligi:&nbsp;<select id="rate" style="width:auto"><option value="0.6">Sekin (0.6)</option><option value="0.8">O'rtacha (0.8)</option><option value="0.9" selected>Normal</option><option value="1.1">Tez (IELTS)</option></select></label></div>
+  <details open><summary>💡 IELTS Listening maslahatlari</summary><ul><li>Audio boshlanishidan oldin savollarni <b>o'qib chiqing</b> va kalit so'zlarni chizing.</li><li>Audio faqat <b>1 marta</b> eshittiriladi — shoshmang, ketma-ket davom eting.</li><li>Raqam, ism, sana — imlosiga e'tibor bering (spelling).</li><li>Distraktor: gapiruvchi fikrini o'zgartiradi ("Friday… no, sorry, Thursday").</li></ul></details>
+  <h3>✍️ Diktant (eshit va yoz)</h3><div class="tabs">${Object.keys(DICT).map(l=>`<button data-dl="${l}" class="${l===DL?"on":""}">${l}</button>`).join("")}</div><button class="btn" id="dstart">▶ ${DL} diktantni boshlash</button>
+  <h3>🎙 Tinglab tushunish</h3><div class="grid">${LIST.map((l,i)=>`<div class="card item" data-l="${i}"><b>${l.title}</b><span class="tag">${l.lv}</span><div class="mut">${S.listening[i]!==undefined?"Oxirgi natija: "+S.listening[i]+"/"+l.qs.length:"Hali ishlanmagan"}</div></div>`).join("")}</div>`;
+  app().innerHTML=h;
+  $("#rate").onchange=e=>{RATE=+e.target.value};$("#rate").value=String(RATE);
+  bind("[data-dl]",b=>{DL=b.dataset.dl;viewListen()});
+  $("#dstart").onclick=()=>runQs(DICT[DL].map(s=>({k:"type",say:s})),{title:"✍️ Diktant "+DL,exit:()=>go("listen")},r=>{addXP(r.c*3);app().innerHTML=`<div class="panel res"><div class="big">${r.c===r.t?"🎉":"💪"}</div><h2>Diktant tugadi</h2><p><b>${r.c}/${r.t}</b></p><button class="btn" id="b">Orqaga</button></div>`;$("#b").onclick=()=>go("listen")});
+  bind("[data-l]",e=>openListen(+e.dataset.l));
+}
+function openListen(i){
+  const l=LIST[i];
+  app().innerHTML=`<button class="btn sec" id="back">◀ Orqaga</button><h2>${l.title} <span class="tag">${l.lv}</span></h2><div class="panel"><div class="hint">Audioni eshiting (matn yashirin)</div><button class="btn" data-say="${esc(l.text)}">▶ Eshitish</button><button class="btn sec" data-say="${esc(l.text)}" data-rate="0.65">🐢 Sekin</button><button class="btn sec" id="stop">⏹ To'xtatish</button></div>${testHtml(l.qs,"lq")}<button class="btn" id="chk">Tekshirish</button><div id="out"></div>`;
+  $("#back").onclick=()=>go("listen");$("#stop").onclick=()=>speechSynthesis.cancel();
+  $("#chk").onclick=()=>{const c=gradeTest(l.qs,"lq");S.listening[i]=c;addXP(c*6);save();$("#chk").disabled=true;$("#out").innerHTML=`<div class="an"><b>Natija: ${c}/${l.qs.length}</b><br><b>Matn (transcript):</b> ${esc(l.text)}</div>`}
+}
+
+/* ---------- SPEAKING ---------- */
+const SP1=[["Hometown",["Where is your hometown?","What do you like most about it?","Has it changed much in recent years?"]],["Work or study",["Do you work or are you a student?","Why did you choose that job or subject?","What do you find most difficult about it?"]],["Hobbies",["What do you do in your free time?","Did you have the same hobbies as a child?","Would you like to try a new hobby?"]],["Food",["What is your favourite food?","Do you prefer eating at home or in restaurants?","Is traditional food still popular in your country?"]],["Technology",["How often do you use your phone?","What apps do you use most?","Do you think people depend too much on technology?"]],["Family",["Do you have a large family?","Who are you closest to in your family?","What do you usually do together?"]]];
+const SP2=[{t:"Describe a person who has influenced you.",p:["who the person is","how you know them","what they did","why they influenced you"]},{t:"Describe a place you would like to visit.",p:["where it is","how you learned about it","what you would do there","why you want to go"]},{t:"Describe a skill you would like to learn.",p:["what the skill is","why you want to learn it","how you would learn it","how it would help you"]},{t:"Describe a memorable journey you have taken.",p:["where you went","who you went with","what happened","why it was memorable"]},{t:"Describe a book or film you enjoyed.",p:["what it was about","when you read/watched it","what you liked","why you recommend it"]},{t:"Describe a time you helped someone.",p:["who you helped","what the problem was","what you did","how you felt"]}];
+const SP3=["Why do some people prefer to live in big cities?","How has technology changed the way people communicate?","Do you think education systems need to change? Why?","What can governments do to protect the environment?","Is it better to work for a company or to be self-employed?","How important is it to learn foreign languages?","Do you think young people today have more opportunities than their parents?","What are the advantages and disadvantages of social media?"];
+const FILL=["um","uh","er","like","you know","actually","basically","i mean"];
+const LINK=["however","therefore","moreover","furthermore","in addition","for example","for instance","on the other hand","as a result","consequently","although","whereas","nevertheless","in contrast","firstly","secondly","finally","in conclusion","overall","because","so that","while","despite","in my opinion","to sum up","besides","also","but","and then"];
+let SPS={part:1,q:"",cue:null,rec:null,t0:0,tm:null};
+function newSpQ(){if(SPS.part===1){const g=pick(SP1,1)[0];SPS.q=g[0]+": "+pick(g[1],1)[0];SPS.cue=null}else if(SPS.part===2){SPS.cue=pick(SP2,1)[0];SPS.q=SPS.cue.t}else{SPS.q=pick(SP3,1)[0];SPS.cue=null}}
+function viewSpeak(){
+  if(!SPS.q)newSpQ();
+  const c=SPS.cue;
+  app().innerHTML=`<h2>🎤 Speaking</h2><p class="mut">IELTS Speaking 3 qismdan iborat. Savolni tanlang → javob bering (mikrofon yoki yozib) → tahlil oling.</p>
+  <div class="tabs">${[1,2,3].map(p=>`<button data-sp="${p}" class="${SPS.part===p?"on":""}">Part ${p}${["","  • tanishuv","  • 2 daqiqa monolog","  • muhokama"][p]}</button>`).join("")}</div>
+  <div class="panel" style="text-align:left"><div class="hint">${["","Part 1: 4–5 gapdan iborat qisqa javob bering.","Part 2: 1 daqiqa tayyorlaning, so'ng 1–2 daqiqa to'xtamay gapiring.","Part 3: fikringizni sabab va misollar bilan asoslang."][SPS.part]}</div><div class="q" style="text-align:left">${esc(SPS.q)}</div>${c?`<ul>${c.p.map(x=>`<li>You should say: ${esc(x)}</li>`).join("")}</ul>`:""}
+  <div class="row"><button class="btn sec" data-say="${esc(SPS.q)}">🔊 Savolni eshitish</button><button class="btn sec" id="nq">🎲 Boshqa savol</button></div>
+  ${SPS.part===2?`<div class="timer" id="tm">01:00</div><div class="row"><button class="btn sec" id="prep">⏱ Tayyorgarlik (60s)</button></div>`:""}
+  <div class="row"><button class="btn" id="mic">🎤 Gapirishni boshlash</button><button class="btn red" id="stp" style="display:none">⏹ To'xtatish</button></div>
+  <p class="mut">Mikrofon ishlamasa, javobingizni quyiga yozing:</p><textarea id="sa" style="min-height:130px" placeholder="Javobingiz shu yerda ko'rinadi (yoki yozing)..."></textarea><button class="btn ok" id="an">📊 Javobni tahlil qilish</button></div><div id="out"></div>
+  <details><summary>🗣 Foydali iboralar</summary><ul><li>Fikr bildirish: <b>In my opinion… / As far as I'm concerned… / I strongly believe…</b></li><li>Vaqt olish: <b>That's an interesting question. / Let me think… / Well…</b></li><li>Sabab: <b>The main reason is that… / This is because…</b></li><li>Misol: <b>For example… / A good example is…</b></li><li>Qarama-qarshi: <b>On the other hand… / Having said that…</b></li><li>Xulosa: <b>To sum up… / All in all…</b></li></ul></details>
+  <details><summary>💡 Band 7 uchun maslahatlar</summary><ul><li>"Yes/No" bilan to'xtamang — <b>sabab + misol</b> qo'shing.</li><li>"Um/uh" o'rniga <i>well, actually, let me think</i> deng.</li><li>Bir xil so'zni takrorlamang: good → <i>excellent, beneficial, valuable</i>.</li><li>Turli zamonlar va shart gaplardan foydalaning.</li><li>Talaffuz: intonatsiya va ritm muhimroq, aksent emas.</li></ul></details>`;
+  bind("[data-sp]",b=>{SPS.part=+b.dataset.sp;newSpQ();viewSpeak()});
+  $("#nq").onclick=()=>{newSpQ();viewSpeak()};
+  if(SPS.part===2)$("#prep").onclick=()=>{let s=60;clearInterval(SPS.tm);SPS.tm=setInterval(()=>{s--;const m=$("#tm");if(!m){clearInterval(SPS.tm);return}m.textContent="00:"+String(Math.max(s,0)).padStart(2,"0");if(s<=0){clearInterval(SPS.tm);m.textContent="Gapiring! 🎤"}},1000)};
+  $("#mic").onclick=()=>{if(!SRC){alert("Bu brauzer mikrofonni qo'llamaydi. Chrome da oching yoki javobni yozing.");return}
+    SPS.t0=Date.now();$("#mic").style.display="none";$("#stp").style.display="inline-block";
+    SPS.rec=startSR(s=>{$("#sa").value=s},()=>{$("#mic").style.display="inline-block";$("#stp").style.display="none"},true);
+    if(!SPS.rec){$("#mic").style.display="inline-block";$("#stp").style.display="none";alert("Mikrofon ochilmadi. Ruxsat bering yoki yozib mashq qiling.")}};
+  $("#stp").onclick=()=>{try{SPS.rec&&SPS.rec.stop()}catch(e){}};
+  $("#an").onclick=()=>{const tx=$("#sa").value.trim();if(tx.split(/\s+/).length<5){$("#out").innerHTML=`<div class="an">Avval javob bering (kamida bir necha gap).</div>`;return}
+    const sec=SPS.t0?(Date.now()-SPS.t0)/1000:0;SPS.t0=0;$("#out").innerHTML=speechReport(tx,sec);addXP(15)};
+}
+function speechReport(tx,sec){
+  const low=tx.toLowerCase(),words=low.match(/[a-z']+/g)||[],n=words.length;
+  const fill=FILL.filter(f=>new RegExp("\\b"+f+"\\b").test(low));const links=LINK.filter(l=>low.includes(l));
+  const uniq=new Set(words).size,ttr=uniq/n;const need=SPS.part===1?25:SPS.part===2?150:60;
+  let tips=[];
+  tips.push(n>=need?`✅ Uzunlik yaxshi: ${n} so'z.`:`⚠️ Javob qisqa (${n} so'z). Maqsad: kamida ~${need} so'z. Sabab va misol qo'shing.`);
+  tips.push(links.length>=3?`✅ Bog'lovchilar ishlatildi: ${links.slice(0,6).join(", ")}.`:`⚠️ Bog'lovchi kam. Qo'shing: however, for example, as a result, in addition.`);
+  tips.push(fill.length>2?`⚠️ To'ldiruvchi so'zlar ko'p: ${fill.join(", ")}. Pauza qiling yoki "well, let me think" deng.`:`✅ To'ldiruvchi so'zlar kam.`);
+  tips.push(ttr>0.6?`✅ Lug'at boyligi yaxshi.`:`⚠️ So'zlar takrorlanyapti. Sinonimlardan foydalaning.`);
+  if(sec>10){const wpm=Math.round(n/(sec/60));tips.push(`🕒 Tezlik: ~${wpm} so'z/daqiqa (ideal 110–150).`)}
+  if(/\bif\b/.test(low)||/\bwhich\b|\bwho\b/.test(low))tips.push("✅ Murakkab tuzilma ishlatildi (if / who / which).");else tips.push("⚠️ Murakkab gaplar qo'shing: If…, …which…, …who….");
+  return `<div class="an"><b>📊 Tahlil</b> (so'zlar: ${n})<ul>${tips.map(t=>"<li>"+t+"</li>").join("")}</ul><small class="mut">Bu avtomatik, taxminiy tahlil; real ustoz o'rnini bosmaydi.</small></div>`;
+}
+
+/* ---------- WRITING ---------- */
+const WR=[
+{id:"a",ty:"Task 1 • Jadval",min:150,q:"The table shows the percentage of households with internet access in three countries. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",tb:[["Country","2010","2015","2020"],["Country A","35%","58%","85%"],["Country B","20%","41%","70%"],["Country C","60%","72%","78%"]],plan:["1-abzats (Intro): jadval nimani ko'rsatayotganini <b>o'z so'zlaringiz bilan</b> yozing.","2-abzats (Overview): 2 ta asosiy umumiy trend (hammasi o'sgan; C eng yuqori boshlagan, A eng ko'p o'sgan).","3-abzats: 2010 → 2020 raqamlar bilan A va B.","4-abzats: C ni boshqalar bilan solishtiring.","Fikr bildirmang, faqat ma'lumotni yozing!"]},
+{id:"b",ty:"Task 1 • Jadval",min:150,q:"The table shows the number of students (in thousands) studying abroad from four countries in 2000 and 2020. Summarise the information by selecting and reporting the main features.",tb:[["Country","2000","2020"],["India","60","200"],["China","110","350"],["Uzbekistan","5","25"],["Brazil","20","45"]],plan:["Intro: parafraz qiling (The table illustrates… / compares…).","Overview: barcha mamlakatlarda o'sish; Xitoy eng yuqori.","Detail 1: Xitoy va Hindiston (raqamlar bilan).","Detail 2: O'zbekiston va Braziliya, o'sish tezligini solishtiring (<i>fivefold</i> = 5 barobar)."]},
+{id:"c",ty:"Task 1 • Xat (General)",min:150,q:"You recently bought a product online but it arrived damaged. Write a letter to the company. Describe the problem, explain what happened, and say what you want the company to do.",plan:["<b>Dear Sir or Madam,</b> bilan boshlang (ismni bilmasangiz).","1-abzats: nega yozayotganingiz (I am writing to complain about…).","2-abzats: muammo tafsiloti (buyurtma raqami, sana, nima buzilgan).","3-abzats: nima xohlaysiz (refund / replacement). <i>I would be grateful if you could…</i>","Oxiri: <b>Yours faithfully,</b> + ismingiz."]},
+{id:"d",ty:"Task 2 • Essay",min:250,q:"Some people think that children should start school at a very early age, while others believe it is better to start later. Discuss both views and give your opinion.",plan:["Intro: mavzuni parafraz + <b>thesis</b> (ikkala fikr bor, men … ni qo'llab-quvvatlayman).","Body 1: erta boshlashning afzalliklari (ijtimoiylashuv, tez o'rganish) + misol.","Body 2: kech boshlashning afzalliklari (bolalik, psixologik tayyorlik) + misol.","Conclusion: <i>In conclusion, although…, I believe that…</i>"]},
+{id:"e",ty:"Task 2 • Essay",min:250,q:"Many people believe that technology has made our lives more complicated rather than easier. To what extent do you agree or disagree?",plan:["Intro: parafraz + fikringiz (partly agree / strongly disagree).","Body 1: asosiy dalil + tushuntirish + misol.","Body 2: ikkinchi dalil yoki qarama-qarshi fikrga javob.","Conclusion: fikringizni boshqa so'zlar bilan takrorlang. Yangi fikr qo'shmang."]},
+{id:"f",ty:"Task 2 • Essay",min:250,q:"Some people say that governments should spend money on public transport rather than building new roads. Do you agree or disagree?",plan:["Intro + pozitsiya.","Body 1: jamoat transporti: ifloslanish, tirbandlik, arzonlik.","Body 2: yangi yo'llar: qachon kerak bo'lishi mumkin (qishloqlar) — lekin sizning pozitsiyangiz ustun.","Conclusion."]},
+{id:"g",ty:"Task 2 • Essay",min:250,q:"In many countries, young people leave rural areas for cities. What are the causes and what problems does this create?",plan:["Intro: hodisani parafraz qiling + nima haqida yozishingiz.","Body 1: sabablar (ish, ta'lim, hayot sifati).","Body 2: muammolar (qishloq bo'shab qolishi, shaharda tirbandlik, uy-joy narxi).","Conclusion: qisqacha xulosa + mumkin yechim."]}
+];
+const ESSAY_LINKS=["however","therefore","moreover","furthermore","in addition","for example","for instance","on the other hand","as a result","consequently","although","whereas","nevertheless","in contrast","firstly","secondly","finally","in conclusion","overall","while","despite","to sum up","besides","as well as","in particular"];
+let WI=null;
+function viewWrite(){
+  if(WI===null){
+    app().innerHTML=`<h2>✍️ Writing</h2><p class="mut">IELTS Writing: 60 daqiqa — Task 1 (20 daq, 150+ so'z) va Task 2 (40 daq, 250+ so'z). Mavzuni tanlang, yozing va avtomatik tahlil oling.</p><details><summary>💡 Band oshirish qoidalari</summary><ul><li>Task 2 da <b>4 abzats</b>: intro, 2 ta body, conclusion.</li><li>Har bir body: <b>fikr → tushuntirish → misol</b>.</li><li>Kontraksiya yozmang (don't → do not), rasmiy uslub.</li><li>Turli gap tuzilmalari: shart, majhul, who/which.</li><li>Oxirgi 3 daqiqada imlo va artikllarni tekshiring.</li></ul></details><div class="grid">${WR.map((w,i)=>`<div class="card item" data-w="${i}"><span class="tag">${w.ty}</span><p>${esc(w.q.slice(0,90))}…</p></div>`).join("")}</div>`;
+    bind("[data-w]",e=>{WI=+e.dataset.w;viewWrite()});return}
+  const w=WR[WI];let draft="";try{draft=localStorage.getItem("em_draft_"+w.id)||""}catch(e){}
+  app().innerHTML=`<button class="btn sec" id="back">◀ Mavzular</button><h2>${w.ty}</h2><div class="passage">${esc(w.q)}</div>${w.tb?`<table>${w.tb.map((r,i)=>"<tr>"+r.map(c=>i?"<td>"+c+"</td>":"<th>"+c+"</th>").join("")+"</tr>").join("")}</table>`:""}<details><summary>📋 Namuna reja (tuzilma)</summary><ol>${w.plan.map(p=>"<li>"+p+"</li>").join("")}</ol></details><p style="margin-top:10px"><b id="wc">0</b> so'z (kamida ${w.min}) • <b id="pc">0</b> abzats <span class="mut" id="tm2"></span></p><textarea id="wt" placeholder="Shu yerga inglizcha yozing...">${esc(draft)}</textarea><div class="row"><button class="btn ok" id="chk">📊 Tekshirish</button><button class="btn sec" id="tmr">⏱ ${w.min>=250?"40":"20"} daqiqalik taymer</button></div><div id="out"></div>`;
+  const upd=()=>{const t=$("#wt").value;$("#wc").textContent=(t.match(/[A-Za-z']+/g)||[]).length;$("#pc").textContent=t.split(/\n\s*\n/).filter(x=>x.trim()).length;try{localStorage.setItem("em_draft_"+w.id,t)}catch(e){}};
+  $("#wt").oninput=upd;upd();$("#back").onclick=()=>{WI=null;viewWrite()};
+  $("#tmr").onclick=()=>{let s=(w.min>=250?40:20)*60;clearInterval(SPS.tm);SPS.tm=setInterval(()=>{s--;const m=$("#tm2");if(!m){clearInterval(SPS.tm);return}m.textContent="• Qolgan: "+Math.floor(s/60)+":"+String(s%60).padStart(2,"0");if(s<=0){clearInterval(SPS.tm);m.textContent="• Vaqt tugadi!"}},1000)};
+  $("#chk").onclick=()=>{$("#out").innerHTML=writeReport($("#wt").value,w);addXP(20)};
+}
+function writeReport(tx,w){
+  const low=tx.toLowerCase(),words=low.match(/[a-z']+/g)||[],n=words.length;
+  if(n<20)return `<div class="an">Avval ko'proq yozing (kamida bir necha gap).</div>`;
+  const paras=tx.split(/\n\s*\n/).filter(x=>x.trim()).length;
+  const sents=tx.split(/[.!?]+/).filter(x=>x.trim().length>2),avg=n/Math.max(sents.length,1);
+  const links=ESSAY_LINKS.filter(l=>low.includes(l));const uniq=new Set(words).size,ttr=uniq/n;
+  const longw=words.filter(x=>x.length>=8).length/n;
+  const cx=(low.match(/\b(if|unless|although|whereas|while|which|who|whose|that|because|despite|having)\b/g)||[]).length;
+  const pas=/\b(is|are|was|were|been|be)\s+\w+(ed|en)\b/.test(low);
+  const contr=(tx.match(/\b\w+'(t|s|re|ve|ll|d|m)\b/gi)||[]).filter(x=>!/'s$/i.test(x));
+  const cnt={};words.forEach(x=>{if(x.length>4)cnt[x]=(cnt[x]||0)+1});const rep=Object.entries(cnt).filter(e=>e[1]>=4).map(e=>e[0]+" ("+e[1]+")");
+  let b=3.5,tips=[];
+  if(n>=w.min){b+=1;tips.push(`✅ So'z soni yetarli: ${n}.`)}else{tips.push(`⚠️ So'z kam: ${n}/${w.min}. Band pasayadi.`)}
+  if(w.min>=250){if(paras>=4){b+=.5;tips.push("✅ 4+ abzats — tuzilma yaxshi.")}else tips.push("⚠️ Essay uchun 4 abzats yozing: intro, 2 body, conclusion.")}
+  if(links.length>=4){b+=.5;tips.push(`✅ Bog'lovchilar: ${links.slice(0,6).join(", ")}.`)}else tips.push("⚠️ Bog'lovchi kam: However, Moreover, For example, As a result…");
+  if(ttr>0.5){b+=.5;tips.push("✅ Lug'at xilma-xil.")}else tips.push("⚠️ Takror ko'p — sinonimlar toping.");
+  if(avg>=13&&avg<=26){b+=.5;tips.push(`✅ Gap uzunligi mos (o'rtacha ${avg.toFixed(1)} so'z).`)}else tips.push(avg<13?"⚠️ Gaplar juda qisqa — qo'shib, murakkablashtiring.":"⚠️ Gaplar juda uzun — bo'lib yozing.");
+  if(cx>=5){b+=.5;tips.push("✅ Murakkab tuzilmalar bor (if/which/although...).")}else tips.push("⚠️ Murakkab gaplar qo'shing: although, which, if.");
+  if(longw>0.12){b+=.5;tips.push("✅ Akademik (uzun) so'zlar bor.")}
+  if(pas){b+=.25;tips.push("✅ Majhul nisbat ishlatilgan.")}
+  if(contr.length){tips.push(`⚠️ Qisqartmalar topildi (${contr.slice(0,3).join(", ")}). Rasmiy yozuvda to'liq yozing.`)}
+  if(rep.length)tips.push(`⚠️ Ko'p takrorlangan so'zlar: ${rep.slice(0,4).join(", ")}.`);
+  if(!/[A-Z]/.test(tx[0]))tips.push("⚠️ Bosh harfga e'tibor bering.");
+  if(n<w.min*0.6)b=Math.min(b,4.5);b=Math.min(b,7);
+  return `<div class="an"><b>📊 Taxminiy band: ${b.toFixed(1)}</b> (so'z: ${n}, abzats: ${paras})<ul>${tips.map(t=>"<li>"+t+"</li>").join("")}</ul><small class="mut">Bu faqat so'z soni, tuzilma va lug'at bo'yicha avtomatik baho. Mazmun va grammatikani ustoz bilan tekshirtiring.</small></div>`;
+}
+
+/* ---------- IELTS ---------- */
+function viewIelts(){
+  app().innerHTML=`<h2>🎓 IELTS tayyorgarlik markazi</h2>
+  <details open><summary>📋 IELTS tuzilishi (Academic / General)</summary><table><tr><th>Bo'lim</th><th>Vaqt</th><th>Tuzilma</th></tr><tr><td>Listening</td><td>30 daq + 10 ko'chirish</td><td>4 qism, 40 savol</td></tr><tr><td>Reading</td><td>60 daq</td><td>3 matn, 40 savol</td></tr><tr><td>Writing</td><td>60 daq</td><td>Task 1 (150 so'z) + Task 2 (250 so'z)</td></tr><tr><td>Speaking</td><td>11–14 daq</td><td>Part 1, 2, 3 — ustoz bilan</td></tr></table></details>
+  <details><summary>📊 Band darajalari</summary><table><tr><th>Band</th><th>Daraja</th><th>Ma'nosi</th></tr><tr><td>4.0–5.0</td><td>A2–B1</td><td>Cheklangan foydalanuvchi</td></tr><tr><td>5.5–6.0</td><td>B1+</td><td>O'rtacha foydalanuvchi — ko'p xatolar</td></tr><tr><td>6.5–7.0</td><td>B2</td><td>Yaxshi — universitet uchun odatda 6.0–6.5</td></tr><tr><td>7.5+</td><td>C1</td><td>Juda yaxshi — erkin muloqot</td></tr></table></details>
+  <details><summary>🗓 30 kunlik reja</summary><ol><li><b>1-hafta (A1–A2):</b> Darslar bo'limida A1–A2 mavzularini 7 ta o'yin bilan tugating. Kuniga 1 mavzu + 10 ta yangi so'z.</li><li><b>2-hafta (B1):</b> Zamonlar, modal fe'llar, ta'lim lug'ati. Har kuni 1 ta Reading + 1 ta diktant.</li><li><b>3-hafta (B2):</b> Shart gaplar, passive, reported speech. Haftada 2 ta Task 2 essay. Kunda Speaking Part 1+3 mashqi.</li><li><b>4-hafta (C1):</b> Akademik so'zlar, Task 1 lug'ati, mini mock test. Har kuni 1 ta Part 2 (2 daqiqa).</li></ol></details>
+  <details><summary>🎯 Har bir bo'lim uchun strategiya</summary><ul><li><b>Listening:</b> savollarni oldindan o'qing; so'z imlosiga e'tibor; javobni darrov yozing.</li><li><b>Reading:</b> skimming + scanning; True/False/Not Given'da «matnda yo'q = Not Given».</li><li><b>Writing:</b> 5 daqiqa reja → yozish → 3 daqiqa tekshirish.</li><li><b>Speaking:</b> javobni uzaytiring (Answer + Reason + Example). Pauza qilsangiz ham tabiiy bo'ling.</li></ul></details>
+  <details><summary>🧠 Samarali yodlash usullari</summary><ul><li>Har kuni <b>10 ta so'z</b> + 10 ta gap tuzing.</li><li>3-kun, 7-kun, 14-kunda qayta takrorlang (spaced repetition).</li><li>O'yinlarni qayta-qayta o'ynang — natijani 3 yulduzga yetkazing.</li><li>Kunda 10 daqiqa inglizcha podkast / video tinglang.</li></ul></details>
+  <h3>🧪 Mini mock test</h3><p class="mut">Grammatika va lug'atdan 16 ta aralash savol. Oxirida taxminiy band beriladi.</p><button class="btn ok" id="mock">▶ Mock testni boshlash</button>
+  <div id="hist"></div>`;
+  $("#mock").onclick=()=>{const all=[].concat(...TOPICS.map(t=>t.g.map(x=>({k:"mc",p:x[0],hl:t.t,gap:true,o:shuffle(x[1]),a:x[1][x[2]]}))));
+    runQs(pick(all,16),{title:"🧪 IELTS mini mock",exit:()=>go("ielts")},r=>{const p=r.c/r.t*100,band=p>=90?8:p>=80?7:p>=70?6.5:p>=60?6:p>=50?5.5:p>=40?5:p>=30?4.5:4;S.mocks.push({d:dayStr(Date.now()),c:r.c,t:r.t,b:band});addXP(r.c*3);save();
+      app().innerHTML=`<div class="panel res"><div class="big">🎓</div><h2>Mock natija: ${r.c}/${r.t}</h2><h2 style="color:var(--pri)">Taxminiy band: ${band}</h2><p class="mut">Bu faqat grammatika/lug'at darajasini ko'rsatadi.</p><button class="btn" id="b">Orqaga</button></div>`;$("#b").onclick=()=>go("ielts")})};
+  if(S.mocks.length)$("#hist").innerHTML=`<h3>Oldingi mocklar</h3><table><tr><th>Sana</th><th>Natija</th><th>Band</th></tr>${S.mocks.slice(-5).reverse().map(m=>`<tr><td>${m.d}</td><td>${m.c}/${m.t}</td><td>${m.b}</td></tr>`).join("")}</table>`;
+}
+
+/* ---------- NATIJA ---------- */
+function viewStat(){
+  const acc=S.total?Math.round(S.right/S.total*100):0,done=Object.keys(S.done).length;
+  let lvl="Boshlovchi",ielts="—";const ord=["A1","A2","B1","B2","C1"],map={A1:"~3.0",A2:"3.5–4.0",B1:"4.5–5.5",B2:"6.0–6.5",C1:"7.0+"};
+  for(const l of ord){const ts=TOPICS.filter(t=>t.lv===l),d=ts.filter(t=>S.done[t.id]>0).length;if(d>=Math.ceil(ts.length*0.6)){lvl=l;ielts=map[l]}else break}
+  const B=[["🌱","Birinchi qadam",done>=1],["📚","5 ta mavzu",done>=5],["🔥","3 kunlik streak",S.streak>=3],["⭐","500 XP",S.xp>=500],["💎","1500 XP",S.xp>=1500],["🏅","10 ta mavzu",done>=10],["👑","Barcha mavzular",done>=TOPICS.length],["🎯","80% aniqlik",acc>=80&&S.total>=50]];
+  app().innerHTML=`<h2>🏆 Sizning natijalaringiz</h2><div class="grid"><div class="card"><div class="big">${S.xp}</div>XP ball</div><div class="card"><div class="big">${S.streak}</div>kunlik streak</div><div class="card"><div class="big">${done}/${TOPICS.length}</div>mavzu tugagan</div><div class="card"><div class="big">${acc}%</div>aniqlik (${S.right}/${S.total})</div></div><div class="hero" style="margin-top:14px"><h3>Taxminiy darajangiz: <span style="color:var(--pri)">${lvl}</span> ${ielts!=="—"?"• IELTS "+ielts:""}</h3><p class="mut">Daraja har bir bosqichdagi mavzularning kamida 60% ini tugatishingizga qarab hisoblanadi.</p></div><h3>🎖 Yutuqlar</h3>${B.map(b=>`<span class="badge ${b[2]?"":"off"}">${b[0]} ${b[1]}</span>`).join("")}<h3>Mavzular bo'yicha</h3><table><tr><th>Mavzu</th><th>Daraja</th><th>Yulduz</th></tr>${TOPICS.map(t=>`<tr><td>${t.ic} ${t.t}</td><td>${t.lv}</td><td class="stars">${"★".repeat(S.done[t.id]||0)||"—"}</td></tr>`).join("")}</table><p><button class="btn red" id="rs">Hammasini o'chirish</button></p>`;
+  $("#rs").onclick=()=>{if(confirm("Barcha natijalar o'chiriladi. Ishonchingiz komilmi?")){S={xp:0,streak:0,last:"",done:{},right:0,total:0,reading:{},listening:{},mocks:[]};save();head();render()}};
+}
+
+/* ============ BOSHLASH ============ */
+try{speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices()}catch(e){}
+head();render();
+</script>
+</body>
+</html>
